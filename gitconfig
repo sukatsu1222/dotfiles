@@ -1,0 +1,10 @@
+[color]
+	ui = auto
+[push]
+	default = simple
+[core]
+	excludesfile = ${HOME}/.gitignore_global
+[user]
+	useConfigOnly = true
+[include]
+	path = ${HOME}/.gitconfig.local
