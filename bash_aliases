@@ -15,7 +15,6 @@ alias egrep='egrep --color=auto'
 alias mkdir='mkdir -p'
 
 if type nvim >/dev/null 2>&1; then
-  alias vi='nvim'
   alias nv='nvim'
 elif type vim >/dev/null 2>&1; then
   alias vi='vim'
