@@ -4,12 +4,6 @@
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-case $TERM in
-  xterm* | screen* | linux*) export LANGUAGE=en_US.UTF-8 ;;
-  *) export LANGUAGE=ja_JP.UTF-8 ;;
-esac
-export LANG=${LANGUAGE}
-
 PATH=$PATH:$HOME/.local/bin:$HOME/bin
 
 export XDG_CONFIG_HOME=${HOME}/.config
