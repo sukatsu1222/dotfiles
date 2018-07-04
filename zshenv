@@ -7,7 +7,13 @@ case $TERM in
   *) LANGUAGE=ja_JP.UTF-8 ;;
 esac
 export LANG=${LANGUAGE}
-export LC_ALL=${LANGUAGE}
+
+if [[ -z $TMUX ]] && [[ -e /usr/share/terminfo/x/xterm-256color ]]; then
+  export TERM=xterm-256color
+fi
+
+export XDG_CONFIG_HOME=${HOME}/.config
+export XDG_CACHE_HOME=${HOME}/.cache
 
 if type nvim >/dev/null 2>&1; then
   export EDITOR=nvim
@@ -36,15 +42,24 @@ path=(
   /usr/local/sbin(N-/)
   /usr/bin(N-/)
   /usr/sbin(N-/)
+  /bin(N-/)
+  /sbin(N-/)
   $path
-  /usr/local/go/bin(N-/)
   ${HOME}/.local/bin(N-/)
   ${HOME}/bin(N-/)
 )
 
-if type go >/dev/null 2>&1; then
-  export GOPATH="${HOME}/dev/go"
-  export PATH="${PATH}:${GOPATH}/bin"
+# pyenv
+if [ -d ${HOME}/.pyenv ]; then
+  export PYENV_ROOT=${HOME}/.pyenv
+  export PATH=${PYENV_ROOT}/bin/:${PATH}
+  eval "$(pyenv init -)"
+fi
+
+# Golang
+if [ -d /usr/local/go ]; then
+  export GOPATH=${HOME}/dev
+  export PATH=${PATH}:/usr/local/go/bin:${GOPATH}/bin
 fi
 
 fpath=(
@@ -53,9 +68,3 @@ fpath=(
   ${HOME}/.local/share/zsh/Completions(N-/)
 )
 
-export XDG_CONFIG_HOME=${HOME}/.config
-export XDG_CACHE_HOME=${HOME}/.cache
-
-if [[ -z $TMUX ]] && [[ -e /usr/share/terminfo/x/xterm-256color ]]; then
-  export TERM=xterm-256color
-fi
