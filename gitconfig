@@ -3,8 +3,8 @@
 [push]
 	default = simple
 [core]
-	excludesfile = ${HOME}/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [user]
 	useConfigOnly = true
 [include]
-	path = ${HOME}/.gitconfig.local
+	path = ~/.gitconfig.local
