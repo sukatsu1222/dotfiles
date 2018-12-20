@@ -1,6 +1,6 @@
 # zsh/c2_prompt.zsh
-PROMPT="%F{blue}%n%f%F{white}@%f%F{cyan}%m%f %B%F{cyan}%~%f%b
-%# "
+PROMPT="%B%F{white}%~%f%b
+%F{blue}>%f "
 RPROMPT=""
 
 autoload -Uz vcs_info
