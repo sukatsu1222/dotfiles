@@ -26,16 +26,26 @@ fi
 export VISUAL=${EDITOR}
 export GIT_EDITOR=${EDITOR}
 
-# pyenv
+# set pyenv and Python envirnment
 if [ -d ${HOME}/.pyenv ]; then
-  export PYENV_ROOT=${HOME}/.pyenv
-  export PATH=${PYENV_ROOT}/bin:${PATH}
+  export PYENV_ROOT="${HOME}/.pyenv"
+  export PATH="${PYENV_ROOT}/bin:${PATH}"
   eval "$(pyenv init -)"
 fi
+if type pipenv >/dev/null 2>&1; then
+  eval "$(pipenv --completion)"
+  export PIPENV_VENV_IN_PROJECT=true
+fi
 
-# Golang
-if [ -d /usr/local/go ]; then
+# set goenv and Golang envirnment
+if [ -d ${HOME}/.goenv ]; then
+  export GOENV_ROOT="${HOME}/.goenv"
+  export PATH="${GOENV_ROOT}/bin:${PATH}"
+  eval "$(goenv init -)"
+fi
+
+if type go >/dev/null 2>&1; then
   export GOPATH=${HOME}/dev
-  export PATH=${PATH}:/usr/local/go/bin:${GOPATH}/bin
+  export PATH=${PATH}:${GOPATH}/bin
 fi
 
