@@ -1,17 +1,10 @@
-umask 022
-limit coredumpsize 0
+#
+# User configuration sourced by interactive shells
+#
 
-# Use emacs keybindings
-bindkey -e
+# Define zim location
+export ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
 
-# Word chars (without /)
-WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+# Start zim
+[[ -s ${ZIM_HOME}/init.zsh ]] && source ${ZIM_HOME}/init.zsh
 
-ZSH_CONFIG=${HOME}/.config/zsh
-for f in ${ZSH_CONFIG}/*.zsh; do
-  source $f
-done
-
-if type zprof >/dev/null 2>&1; then
-  zprof | less
-fi

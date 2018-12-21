@@ -24,17 +24,6 @@ else
 fi
 export VISUAL=$EDITOR
 
-export PAGER=less
-export LESS='-R -i -M -X -F'
-export LESSCHARSET='utf-8'
-export LESS_TERMCAP_mb=$(tput bold; tput setaf 1)    # Start blinking
-export LESS_TERMCAP_md=$(tput bold; tput setaf 5)    # Start bold mode
-export LESS_TERMCAP_me=$(tput sgr0)                  # End all mode like so, us, mb, md, and mr
-export LESS_TERMCAP_so=$(tput setab 7; tput setaf 0) # Start standout mode
-export LESS_TERMCAP_se=$(tput rmso; tput sgr0)       # End standout mode
-export LESS_TERMCAP_us=$(tput setaf 2)               # Start underlining
-export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)       # End underlining
-
 typeset -U path fpath cdpath manpath
 
 path=(
@@ -49,17 +38,27 @@ path=(
   ${HOME}/bin(N-/)
 )
 
-# pyenv
+# set pyenv and Python envirnment
 if [ -d ${HOME}/.pyenv ]; then
-  export PYENV_ROOT=${HOME}/.pyenv
-  export PATH=${PYENV_ROOT}/bin/:${PATH}
+  export PYENV_ROOT="${HOME}/.pyenv"
+  export PATH="${PYENV_ROOT}/bin:${PATH}"
   eval "$(pyenv init -)"
 fi
+if type pipenv >/dev/null 2>&1; then
+  eval "$(pipenv --completion)"
+  export PIPENV_VENV_IN_PROJECT=true
+fi
 
-# Golang
-if [ -d /usr/local/go ]; then
+# set goenv and Golang envirnment
+if [ -d ${HOME}/.goenv ]; then
+  export GOENV_ROOT="${HOME}/.goenv"
+  export PATH="${GOENV_ROOT}/bin:${PATH}"
+  eval "$(goenv init -)"
+fi
+
+if type go >/dev/null 2>&1; then
   export GOPATH=${HOME}/dev
-  export PATH=${PATH}:/usr/local/go/bin:${GOPATH}/bin
+  export PATH=${PATH}:${GOPATH}/bin
 fi
 
 fpath=(
