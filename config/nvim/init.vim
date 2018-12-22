@@ -110,11 +110,6 @@ nnoremap <S-k> {
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
 
-"" Tabs
-nnoremap <Tab> gt
-nnoremap <S-Tab> gT
-nnoremap <silent> <S-t> :tabnew<CR>
-
 "" Clean search (highlight)
 nnoremap <silent> <esc><esc> :<C-u>nohlsearch<cr>
 
@@ -126,11 +121,6 @@ set pastetoggle=<f5>
 
 "" Write with sudo
 cnoremap w!! w !sudo tee > /dev/null %<cr>>
-
-"" quickfix
-map <C-n> :<C-u>cnext<cr>
-map <C-m> :<C-u>cprevious<cr>
-nnoremap <leader>a :cclose<cr>
 
 "=============================================================================
 "" Other Configuration
