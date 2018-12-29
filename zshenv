@@ -39,24 +39,26 @@ path=(
 )
 
 # set pyenv and Python envirnment
-if [ -d ${HOME}/.pyenv ]; then
+if [[ -d ${HOME}/.pyenv ]]; then
   export PYENV_ROOT="${HOME}/.pyenv"
   export PATH="${PYENV_ROOT}/bin:${PATH}"
   eval "$(pyenv init -)"
 fi
-if type pipenv >/dev/null 2>&1; then
+if (( ${+commands[pipenv]} )); then
+#if type pipenv >/dev/null 2>&1; then
   eval "$(pipenv --completion)"
   export PIPENV_VENV_IN_PROJECT=true
 fi
 
 # set goenv and Golang envirnment
-if [ -d ${HOME}/.goenv ]; then
+if [[ -d ${HOME}/.goenv ]]; then
   export GOENV_ROOT="${HOME}/.goenv"
   export PATH="${GOENV_ROOT}/bin:${PATH}"
   eval "$(goenv init -)"
 fi
 
-if type go >/dev/null 2>&1; then
+if (( ${+commands[go]} )); then
+#if type go >/dev/null 2>&1; then
   export GOPATH=${HOME}/dev
   export PATH=${PATH}:${GOPATH}/bin
 fi

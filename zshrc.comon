@@ -1,0 +1,56 @@
+#
+# history-substring-search
+#
+bindkey -M emacs '^P' history-substring-search-up
+bindkey -M emacs '^N' history-substring-search-down
+
+#
+# less Colours
+#
+if [[ ${PAGER} == 'less' ]]; then
+  export LESS_TERMCAP_mb=$(tput bold; tput setaf 1)    # Start blinking
+  export LESS_TERMCAP_md=$(tput bold; tput setaf 5)    # Start bold mode
+  export LESS_TERMCAP_me=$(tput sgr0)                  # End all mode like so, us, mb, md, and mr
+  export LESS_TERMCAP_so=$(tput setab 7; tput setaf 0) # Start standout mode
+  export LESS_TERMCAP_se=$(tput rmso; tput sgr0)       # End standout mode
+  export LESS_TERMCAP_us=$(tput setaf 2)               # Start underlining
+  export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)       # End underlining
+fi
+
+#
+# Aliases
+#
+alias la='ls -A'          # all files
+alias ll='ls -Fhl'        # long format and human-readable sizes
+alias lla='ls -AFhl'      # long format, all files
+alias lr='ll -R'          # long format, recursive
+alias lk='ll -Sr'         # long format, largest file size last
+alias lt='ll -tr'         # long format, newest modification time last
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+alias df='df -h'
+alias du='du -h'
+
+alias d='docker'
+alias dc='docker container'
+alias dcl='docker container ls -a'
+alias dcrun='docker container run --rm -P'
+alias di='docker image'
+alias dil='docker image ls'
+alias dip='docker image pull'
+alias dcomp='docker-compose'
+
+function mdcd() { mkdir -p "$@" && eval cd "\"\$$#\""; }
+
+#
+# Add completion
+#
+if (( ${+commands[kubectl]} )); then
+  source <(kubectl completion zsh)
+fi
+if (( ${+commands[minikube]} )); then
+  source <(minikube completion zsh)
+fi

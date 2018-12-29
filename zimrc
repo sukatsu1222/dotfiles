@@ -9,8 +9,9 @@
 # Select what modules you would like enabled.
 # The second line of modules may depend on options set by modules in the first
 # line. These dependencies are noted on the respective module's README.md.
-zmodules=(tmux directory environment git git-info history input utility \
-          prompt completion syntax-highlighting history-search custom)
+zmodules=(directory environment git git-info history input prompt \
+          completion autosuggestions syntax-highlighting \
+	  history-substring-search )
 
 
 ###################
@@ -74,7 +75,11 @@ zinput_mode='emacs'
 #   https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
 # For (u)rxvt, termite and gnome-terminal users,
 # removing the 'cursor' highlighter will fix the disappearing cursor problem
-zhighlighters=(main brackets)
+if [[ -n "$GNOME_TERMINAL_SCREEN" ]]; then
+  zhighlighters=(main brackets)
+else
+  zhighlighters=(main brackets cursor)
+fi
 
 #
 # SSH
