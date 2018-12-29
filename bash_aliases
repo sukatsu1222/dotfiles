@@ -3,7 +3,14 @@
 #
 alias sudo='sudo '
 
-alias ls='ls --color=auto --group-directories-first -X'
+case ${OSTYPE} in
+  darwin*)
+    alias ls='ls -G'
+    ;;
+  linux*)
+    alias ls='ls --color=auto --group-directories-first -X'
+    ;;
+esac
 alias ll='ls -Fhl'
 alias la='ls -A'
 alias lla='ls -AFhl'
