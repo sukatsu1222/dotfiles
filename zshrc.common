@@ -8,6 +8,8 @@ bindkey -M emacs '^N' history-substring-search-down
 # less Colours
 #
 if [[ ${PAGER} == 'less' ]]; then
+  export LESS='-R -i -M -X -F'
+  export LESSCHARSET='utf-8'
   export LESS_TERMCAP_mb=$(tput bold; tput setaf 1)    # Start blinking
   export LESS_TERMCAP_md=$(tput bold; tput setaf 5)    # Start bold mode
   export LESS_TERMCAP_me=$(tput sgr0)                  # End all mode like so, us, mb, md, and mr
@@ -16,6 +18,21 @@ if [[ ${PAGER} == 'less' ]]; then
   export LESS_TERMCAP_us=$(tput setaf 2)               # Start underlining
   export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)       # End underlining
 fi
+
+#
+# peco
+#
+alias find_cd='cd "$(find . -type d | peco)"'
+
+function peco-select-history() {
+  BUFFER=$(\history -n -r 1 | peco --query "$LBUFFER")
+  CURSOR=$#BUFFER
+  zle clear-screen
+}
+zle -N peco-select-history
+bindkey '^r' peco-select-history
+
+alias gh='cd $(ghq list -p | peco)'
 
 #
 # Aliases
@@ -34,13 +51,13 @@ alias egrep='egrep --color=auto'
 alias df='df -h'
 alias du='du -h'
 
-alias d='docker'
-alias dc='docker container'
-alias dcl='docker container ls -a'
-alias dcrun='docker container run --rm -P'
-alias di='docker image'
-alias dil='docker image ls'
-alias dip='docker image pull'
+alias dk='docker'
+alias dkc='docker container'
+alias dkcl='docker container ls -a'
+alias dkcrun='docker container run --rm -P'
+alias dki='docker image'
+alias dkil='docker image ls'
+alias dkip='docker image pull'
 alias dcomp='docker-compose'
 
 function mdcd() { mkdir -p "$@" && eval cd "\"\$$#\""; }
@@ -53,4 +70,8 @@ if (( ${+commands[kubectl]} )); then
 fi
 if (( ${+commands[minikube]} )); then
   source <(minikube completion zsh)
+fi
+if (( ${+commands[pipenv]} )); then
+  eval "$(pipenv --completion)"
+  export PIPENV_VENV_IN_PROJECT=1
 fi

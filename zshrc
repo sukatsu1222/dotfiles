@@ -24,11 +24,12 @@ fi
 
 # Define zim location
 export ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
+#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 
 # Start zim
 [[ -s ${ZIM_HOME}/init.zsh ]] && source ${ZIM_HOME}/init.zsh
 
+# Read other setting
 case ${OSTYPE} in
   darwin*)
     [[ -s ${HOME}/.zshrc.macos ]] && source ${HOME}/.zshrc.macos
@@ -39,9 +40,6 @@ case ${OSTYPE} in
 esac
 [[ -s ${HOME}/.zshrc.common ]] && source ${HOME}/.zshrc.common
 
-export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
-
-export TMUX_ZSHRC="tmux zshrc"
 if (( ${+commands[zprof]} )); then
   zprof | less
 fi

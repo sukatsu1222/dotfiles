@@ -8,7 +8,7 @@ case $TERM in
 esac
 export LANG=${LANGUAGE}
 
-if [[ -z $TMUX ]] && [[ -e /usr/share/terminfo/x/xterm-256color ]]; then
+if [[ -z ${TMUX} ]] && [[ -e /usr/share/terminfo/x/xterm-256color ]]; then
   export TERM=xterm-256color
 fi
 
@@ -22,7 +22,10 @@ elif type vim >/dev/null 2>&1; then
 else
   export EDITOR=vi
 fi
-export VISUAL=$EDITOR
+export VISUAL=${EDITOR}
+export PYENV_ROOT="${HOME}/.pyenv"
+export NVM_DIR="${HOME}/.nvm"
+export GOPATH=${HOME}/dev
 
 typeset -U path fpath cdpath manpath
 
@@ -34,34 +37,19 @@ path=(
   /bin(N-/)
   /sbin(N-/)
   $path
+  ${PYENV_ROOT}/bin(N-/)
+  ${GOPATH}/bin(N-/)
   ${HOME}/.local/bin(N-/)
   ${HOME}/bin(N-/)
 )
 
 # set pyenv and Python envirnment
-if [[ -d ${HOME}/.pyenv ]]; then
-  export PYENV_ROOT="${HOME}/.pyenv"
-  export PATH="${PYENV_ROOT}/bin:${PATH}"
-  eval "$(pyenv init -)"
-fi
-if (( ${+commands[pipenv]} )); then
-#if type pipenv >/dev/null 2>&1; then
-  eval "$(pipenv --completion)"
-  export PIPENV_VENV_IN_PROJECT=true
+if (( ${+commands[pyenv]} )); then
+  eval "$(pyenv init - --no-rehash)"
 fi
 
-# set goenv and Golang envirnment
-if [[ -d ${HOME}/.goenv ]]; then
-  export GOENV_ROOT="${HOME}/.goenv"
-  export PATH="${GOENV_ROOT}/bin:${PATH}"
-  eval "$(goenv init -)"
-fi
-
-if (( ${+commands[go]} )); then
-#if type go >/dev/null 2>&1; then
-  export GOPATH=${HOME}/dev
-  export PATH=${PATH}:${GOPATH}/bin
-fi
+[[ -s "/usr/local/opt/nvm/nvm.sh" ]] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[[ -s "${NVM_DIR}/nvm.sh" ]] && . "${NVM_DIR}/nvm.sh"  # This loads nvm
 
 fpath=(
   $fpath
