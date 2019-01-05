@@ -77,6 +77,7 @@ zinput_mode='emacs'
 # removing the 'cursor' highlighter will fix the disappearing cursor problem
 if [[ -n "$GNOME_TERMINAL_SCREEN" ]]; then
   zhighlighters=(main brackets)
+  ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 else
   zhighlighters=(main brackets cursor)
 fi

@@ -24,7 +24,6 @@ fi
 
 # Define zim location
 export ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
-#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 
 # Start zim
 [[ -s ${ZIM_HOME}/init.zsh ]] && source ${ZIM_HOME}/init.zsh
