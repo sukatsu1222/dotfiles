@@ -23,6 +23,7 @@ fi
 # peco
 #
 alias find_cd='cd "$(find . -type d | peco)"'
+alias find_file='find . -name "*${1}*" | grep -v "/\." | peco'
 
 function peco-select-history() {
   BUFFER=$(\history -n -r 1 | peco --query "$LBUFFER")
@@ -54,10 +55,16 @@ alias du='du -h'
 alias dk='docker'
 alias dkc='docker container'
 alias dkcl='docker container ls -a'
-alias dkcrun='docker container run --rm -P'
+alias dkcr='docker container run --rm -P'
+alias dkcR='docker container run --rm --publish-all --interactive --tty'
+alias dkcin='docker container inspect'
+alias dkcrm='docker container rm'
 alias dki='docker image'
 alias dkil='docker image ls'
 alias dkip='docker image pull'
+alias dkib='docker image build'
+alias dkiin='docker image inspect'
+alias dkirm='docker image rm'
 alias dcomp='docker-compose'
 
 function mdcd() { mkdir -p "$@" && eval cd "\"\$$#\""; }
@@ -74,4 +81,7 @@ fi
 if (( ${+commands[pipenv]} )); then
   eval "$(pipenv --completion)"
   export PIPENV_VENV_IN_PROJECT=1
+fi
+if (( ${+commands[pip3]} )); then
+  eval "$(pip3 completion --zsh)"
 fi
