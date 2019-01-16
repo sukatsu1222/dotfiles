@@ -8,3 +8,5 @@
 	useConfigOnly = true
 [include]
 	path = ~/.gitconfig.local
+[ghq]
+	root = ~/dev/src

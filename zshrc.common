@@ -20,23 +20,7 @@ if [[ ${PAGER} == 'less' ]]; then
 fi
 
 #
-# peco
-#
-alias find_cd='cd "$(find . -type d | peco)"'
-alias find_file='find . -name "*${1}*" | grep -v "/\." | peco'
-
-function peco-select-history() {
-  BUFFER=$(\history -n -r 1 | peco --query "$LBUFFER")
-  CURSOR=$#BUFFER
-  zle clear-screen
-}
-zle -N peco-select-history
-bindkey '^r' peco-select-history
-
-alias gh='cd $(ghq list -p | peco)'
-
-#
-# Aliases
+# Aliases and functions
 #
 alias la='ls -A'          # all files
 alias ll='ls -Fhl'        # long format and human-readable sizes
@@ -68,6 +52,29 @@ alias dkirm='docker image rm'
 alias dcomp='docker-compose'
 
 function mdcd() { mkdir -p "$@" && eval cd "\"\$$#\""; }
+
+#
+# peco
+#
+function _peco_select_history() {
+  BUFFER=$(fc -l -n -r 1 | peco --query "$LBUFFER")
+  CURSOR=$#BUFFER
+  zle -R -c
+}
+zle -N _peco_select_history
+bindkey '^r' _peco_select_history
+
+function _src_list() {
+  (
+    find ${HOME}/dev/src -not -path "${HOME}/dev/src/localhost/*" -mindepth 3 -maxdepth 3 -type d ;
+    find ${HOME}/dev/src/localhost -mindepth 1 -maxdepth 1 -type d
+  ) | sed -e "s#${HOME}/dev/src/##g"
+}
+
+alias fcd='cd "$(find . -type d  -maxdepth 3 | peco)"'
+alias gcd='cd "$(ghq root)/$(_src_list | peco)"'
+alias -g G='$(ghq root)/$(_src_list | peco)'
+
 
 #
 # Add completion
