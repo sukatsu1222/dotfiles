@@ -69,7 +69,7 @@ set noswapfile
 "=============================================================================
 "" Visual Configurations
 "=============================================================================
-colorscheme solarized
+colorscheme dracula
 syntax on
 "set ruler
 set number
