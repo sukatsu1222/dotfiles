@@ -36,6 +36,8 @@ alias egrep='egrep --color=auto'
 alias df='df -h'
 alias du='du -h'
 
+alias nv='nvim'
+
 alias dk='docker'
 alias dkc='docker container'
 alias dkcl='docker container ls -a'
@@ -68,17 +70,30 @@ function _src_list() {
   (
     find ${HOME}/dev/src -not -path "${HOME}/dev/src/localhost/*" -mindepth 3 -maxdepth 3 -type d ;
     find ${HOME}/dev/src/localhost -mindepth 1 -maxdepth 1 -type d
+    find ${HOME}/dev/src/workspace -follow -mindepth 1 -maxdepth 1 -type d
   ) | sed -e "s#${HOME}/dev/src/##g"
 }
 function gcd() {
   local dir=$(_src_list | peco)
   if [ -n "${dir}" ]; then
     BUFFER="cd \"$(ghq root)/${dir}\""
-    print -z $BUFFER
+    print -z ${BUFFER}
   fi
 }
 
-alias fcd='cd "$(find . -type d  -maxdepth 3 | peco)"'
+function find_cd() {
+  local dir=""
+  if [[ ${PWD} = ${HOME} ]]; then
+    dir=$(find ${HOME} -not -path "${HOME}/.*" -not -path "${HOME}/Library/*" -type d -maxdepth 3 | peco)
+  else
+    dir=$(find ${PWD} -type d -maxdepth 3 | peco)
+  fi
+  if [ -n "${dir}" ]; then
+    BUFFER="cd \"${dir}\""
+    print -z ${BUFFER}
+  fi
+} 2>/dev/null
+alias fcd='find_cd'
 alias -g G='$(ghq root)/$(_src_list | peco)'
 alias -g P='$(ls | peco)'
 
