@@ -23,25 +23,14 @@ else
   export EDITOR=vi
 fi
 export VISUAL=${EDITOR}
-export PYENV_ROOT="${HOME}/.pyenv"
+export PYENV_ROOT=${HOME}/.pyenv
 export NVM_DIR="${HOME}/.nvm"
 export GOPATH=${HOME}/dev
-
-typeset -U path fpath cdpath manpath
-
-path=(
-  /usr/local/bin(N-/)
-  /usr/local/sbin(N-/)
-  /usr/bin(N-/)
-  /usr/sbin(N-/)
-  /bin(N-/)
-  /sbin(N-/)
-  $path
-  ${PYENV_ROOT}/bin(N-/)
-  ${GOPATH}/bin(N-/)
-  ${HOME}/.local/bin(N-/)
-  ${HOME}/bin(N-/)
-)
+if [[ -d /usr/local/opt/go ]]; then
+  export GOROOT=/usr/local/opt/go/libexec
+elif [[ -d /usr/local/go ]]; then
+  export GOROOT=/usr/local/go
+fi
 
 # set pyenv and Python envirnment
 if (( ${+commands[pyenv]} )); then
@@ -50,6 +39,24 @@ fi
 
 [[ -s "/usr/local/opt/nvm/nvm.sh" ]] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 [[ -s "${NVM_DIR}/nvm.sh" ]] && . "${NVM_DIR}/nvm.sh"  # This loads nvm
+
+typeset -U path fpath cdpath manpath
+
+path=(
+  ${PYENV_ROOT}/bin(N-/)
+  ${PYENV_ROOT}/shims(N-/)
+  ${GOROOT}/bin(N-/)
+  ${GOPATH}/bin(N-/)
+  ${HOME}/.local/bin(N-/)
+  ${HOME}/bin(N-/)
+  /usr/local/bin(N-/)
+  /usr/local/sbin(N-/)
+  /usr/bin(N-/)
+  /usr/sbin(N-/)
+  /bin(N-/)
+  /sbin(N-/)
+  $path
+)
 
 fpath=(
   $fpath
