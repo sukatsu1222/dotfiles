@@ -4,7 +4,7 @@
 
 # Starting tmux
 if (( ${+commands[tmux]} )); then
-  if [[ -z $TMUX ]] && [[ ${TERM_PROGRAM} != "vscode" ]]; then
+  if [[ -z ${TMUX} && -z ${VSCODE_PID} && ${TERM_PROGRAM} != "vscode" ]]; then
     if $(tmux has-session 2> /dev/null); then
       tmux list-sessions
       echo -n "Tmux: attach? (Y/n/num) "
