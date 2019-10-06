@@ -1,7 +1,0 @@
-#!/bin/zsh
-if type sha1sum >/dev/null 2>&1; then
-  SESSION="vscode-$(pwd | sha1sum | cut -c 1-8)"
-elif type shasum >/dev/null 2>&1; then
-  SESSION="vscode-$(pwd | shasum | cut -c 1-8)"
-fi
-tmux attach-session -d -t $SESSION || tmux new-session -s $SESSION
