@@ -1,15 +1,15 @@
-source ${HOME}/.zsh.d/zim.zsh
+[[ -s ${HOME}/.zsh.d/zshrc_zim ]] && source ${HOME}/.zsh.d/zshrc_zim
 
 # Read other setting
 case ${OSTYPE} in
   darwin*)
-    [[ -s ${HOME}/.zsh.d/macos.zsh ]] && source ${HOME}/.zsh.d/macos.zsh
+    [[ -s ${HOME}/.zsh.d/zshrc_macos ]] && source ${HOME}/.zsh.d/zshrc_macos
     ;;
   linux*)
-    [[ -s ${HOME}/.zsh.d/linux.zsh ]] && source ${HOME}/.zsh.d/linux.zsh
+    [[ -s ${HOME}/.zsh.d/zshrc_linux ]] && source ${HOME}/.zsh.d/zshrc_linux
     ;;
 esac
-[[ -s ${HOME}/.zsh.d/common.zsh ]] && source ${HOME}/.zsh.d/common.zsh
+[[ -s ${HOME}/.zsh.d/zshrc_common ]] && source ${HOME}/.zsh.d/zshrc_common
 
 
 if (( ${+commands[zprof]} )); then

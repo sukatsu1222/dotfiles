@@ -23,22 +23,9 @@ else
 fi
 export VISUAL=${EDITOR}
 
-export PYENV_ROOT=${HOME}/.pyenv
-export NVM_DIR=${HOME}/.nvm
-export GOPATH=${HOME}/dev
-if [[ -d /usr/local/opt/go ]]; then
-  export GOROOT=/usr/local/opt/go/libexec
-elif [[ -d /usr/local/go ]]; then
-  export GOROOT=/usr/local/go
-fi
-
 typeset -U path fpath cdpath manpath
 
 path=(
-  ${GOROOT}/bin(N-/)
-  ${GOPATH}/bin(N-/)
-  ${PYENV_ROOT}/bin(N-/)
-  ${HOME}/.poetry/bin(N-/)
   ${HOME}/.local/bin(N-/)
   /usr/local/sbin(N-/)
   /usr/local/bin(N-/)
@@ -55,9 +42,42 @@ fpath=(
   ${HOME}/.local/share/zsh/Completions(N-/)
 )
 
+#
+# Python (pyenv and poetry)
+#
+export PYENV_ROOT=${HOME}/.pyenv
+path=(
+  ${PYENV_ROOT}/bin(N-/)
+  ${HOME}/.poetry/bin(N-/)
+  $path
+)
 if (( ${+commands[pyenv]} )); then
   eval "$(pyenv init -)"
 fi
+
+#
+# Golang
+#
+if [[ -d $(brew --prefix)/opt/go/libexec ]]; then
+  export GOROOT=$(brew --prefix)/opt/go/libexec
+elif [[ -d /usr/local/go ]]; then
+  export GOROOT=/usr/local/go
+fi
+if [[ -n ${GOROOT} ]]; then
+  export GOPATH=${HOME}/dev
+  path=(
+    ${GOPATH}/bin(N-/)
+    ${GOROOT}/bin(N-/)
+    $path
+  )
+fi
+
+#
+# Node.js
+#
+export NVM_DIR=${HOME}/.nvm
+[[ -s $(brew --prefix)/opt/nvm/nvm.sh ]] && source $(brew --prefix)/opt/nvm/nvm.sh
+[[ -s ${NVM_DIR}/nvm.sh ]] && ${NVM_DIR}/nvm.sh
 
 # Define Zim location
 ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
