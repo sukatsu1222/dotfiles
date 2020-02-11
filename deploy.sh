@@ -51,10 +51,6 @@ for dot_file in ${DOT_DIR}/*; do
         create_symlink $config_dir $target
       done
       ;;
-    bin )
-      target=${HOME}/bin
-      create_symlink $dot_file $target
-      ;;
     * )
       target=${HOME}/.$(basename $dot_file)
       create_symlink $dot_file $target
