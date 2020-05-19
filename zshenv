@@ -5,11 +5,7 @@
 
 setopt no_global_rcs
 
-case $TERM in
-  xterm* | screen* | linux*) LANGUAGE=en_US.UTF-8 ;;
-  *) LANGUAGE=ja_JP.UTF-8
-esac
-export LANG=${LANGUAGE}
+export LANG=en_US.UTF-8
 
 export XDG_CONFIG_HOME=${HOME}/.config
 export XDG_CACHE_HOME=${HOME}/.cache
@@ -28,9 +24,9 @@ path=(
 )
 
 fpath=(
-  $fpath
   /usr/share/zsh/vendor-completions(N-/)
   ${HOME}/.local/share/zsh/Completions(N-/)
+  $fpath
 )
 
 if (( ${+commands[nvim]} )); then
@@ -62,8 +58,10 @@ fi
 #
 # Golang
 #
-if [[ -d $(brew --prefix)/opt/go/libexec ]]; then
-  export GOROOT=$(brew --prefix)/opt/go/libexec
+if (( ${+commands[brew]} )); then
+  if [[ -d $(brew --prefix)/opt/go/libexec ]]; then
+    export GOROOT=$(brew --prefix)/opt/go/libexec
+  fi
 elif [[ -d /usr/local/go ]]; then
   export GOROOT=/usr/local/go
 fi
@@ -82,7 +80,9 @@ fi
 NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 if [[ -d ${NVM_DIR} ]]; then
   export NVM_DIR
-  [[ -s $(brew --prefix)/opt/nvm/nvm.sh ]] && source $(brew --prefix)/opt/nvm/nvm.sh
+  if (( ${+commands[brew]} )); then
+    [[ -s $(brew --prefix)/opt/nvm/nvm.sh ]] && source $(brew --prefix)/opt/nvm/nvm.sh
+  fi
   [[ -s ${NVM_DIR}/nvm.sh ]] && source ${NVM_DIR}/nvm.sh
 fi
 
