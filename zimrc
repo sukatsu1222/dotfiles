@@ -22,6 +22,8 @@ zmodule git-info
 #zmodule steeef
 zmodule sindresorhus/pure --source async.zsh --source pure.zsh
 
+# conda zsh completion
+zmodule esc/conda-zsh-completion
 # Additional completion definitions for Zsh.
 zmodule zsh-users/zsh-completions
 # Enables and configures smart and extensive tab completion.
