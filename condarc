@@ -1,12 +1,7 @@
 channels:
-  - conda-forge
   - defaults
+  - conda-forge
 channel_priority: strict
 show_channel_urls: true
 safety_checks: disabled
 auto_activate_base: false
-create_default_packages:
-  - ipykernel
-  - jupyter
-  - jupyter_contrib_nbextensions
-  - pip
