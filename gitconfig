@@ -10,3 +10,5 @@
 	path = ~/.gitconfig.local
 [ghq]
 	root = ~/dev/src
+[pull]
+	rebase = false
