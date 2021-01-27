@@ -1,6 +1,13 @@
 {
     "codeCellConfig": {
-        "fontFamily": "'Hack Nerd Font', 'Migu 1M', Menlo, Monaco, 'Courier New', monospace",
+        "fontSize": 14,
+        "lineNumbers": true
+    },
+    "markdownCellConfig": {
+        "fontSize": 14,
+        "lineNumbers": true
+    },
+    "rawCellConfig": {
         "fontSize": 14,
         "lineNumbers": true
     }
