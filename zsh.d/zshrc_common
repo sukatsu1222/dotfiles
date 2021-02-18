@@ -106,5 +106,6 @@ fi
 
 # Anaconda3
 [[ -s ${HOME}/anaconda3/bin/conda ]] && eval "$(${HOME}/anaconda3/bin/conda shell.zsh hook)"
+[[ -s ${HOME}/miniconda3/bin/conda ]] && eval "$(${HOME}/miniconda3/bin/conda shell.zsh hook)"
 [[ -s /usr/local/Caskroom/miniforge/base/bin/conda ]] && eval "$(/usr/local/Caskroom/miniforge/base/bin/conda shell.zsh hook)"
 
