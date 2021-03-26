@@ -90,22 +90,3 @@ function find_cd() {
 alias fcd='find_cd'
 alias -g G='$(ghq root)/$(_src_list | peco)'
 alias -g P='$(ls | peco)'
-
-#
-# Add completion
-#
-if (( ${+commands[kubectl]} )); then
-  source <(kubectl completion zsh)
-fi
-if (( ${+commands[minikube]} )); then
-  source <(minikube completion zsh)
-fi
-if (( ${+commands[pip3]} )); then
-  eval "$(pip3 completion --zsh)"
-fi
-
-# Anaconda3
-[[ -s ${HOME}/anaconda3/bin/conda ]] && eval "$(${HOME}/anaconda3/bin/conda shell.zsh hook)"
-[[ -s ${HOME}/miniconda3/bin/conda ]] && eval "$(${HOME}/miniconda3/bin/conda shell.zsh hook)"
-[[ -s /usr/local/Caskroom/miniforge/base/bin/conda ]] && eval "$(/usr/local/Caskroom/miniforge/base/bin/conda shell.zsh hook)"
-

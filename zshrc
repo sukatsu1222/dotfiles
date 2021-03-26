@@ -11,7 +11,6 @@ case ${OSTYPE} in
 esac
 [[ -s ${HOME}/.zsh.d/zshrc_common ]] && source ${HOME}/.zsh.d/zshrc_common
 
-
 if (( ${+commands[zprof]} )); then
   zprof | less
 fi

@@ -7,7 +7,7 @@
 [user]
 	useConfigOnly = true
 [include]
-	path = ~/.gitconfig.local
+	path = ~/.gitconfig_local
 [ghq]
 	root = ~/dev/src
 [pull]
