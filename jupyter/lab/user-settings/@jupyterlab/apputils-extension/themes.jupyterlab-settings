@@ -8,7 +8,7 @@
     // Application-level visual styling theme
     "theme": "JupyterLab Dark",
     "overrides": {
-        "code-font-family": "'Hack NF', 'Hack Nerd Font', 'Migu 1M', monospace",
-        "content-font-family": "'Hack NF', 'Hack Nerd Font', 'Migu 1m', monospace"
+        "code-font-family": "'Hack Nerd Font', 'Hack NF', 'Migu 1M', Menlo, Monaco, Consolas, 'Courier New', monospace",
+        "content-font-family": "'Hack Nerd Font', 'Hack NF', 'Migu 1M', Menlo, Monaco, Consolas, 'Courier New', monospace"
     }
 }
