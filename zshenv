@@ -53,6 +53,15 @@ if [[ -n ${GOROOT} ]]; then
   )
 fi
 
+# Python
+if [[ -d ${HOME}/.pyenv ]]; then
+  export PYENV_ROOT="${HOME}/.pyenv"
+  path=(
+    ${PYENV_ROOT}/bin(N-/)
+    $path
+  )
+fi
+
 # Node.js
 NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 if [[ -d ${NVM_DIR} ]]; then
