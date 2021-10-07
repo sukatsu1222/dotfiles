@@ -32,6 +32,8 @@ alias du='du -h'
 
 alias nv='nvim'
 
+alias mkdir='mkdir -p'
+
 alias dk='docker'
 alias dkc='docker container'
 alias dkcl='docker container ls -a'
