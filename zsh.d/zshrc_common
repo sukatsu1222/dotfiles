@@ -103,6 +103,7 @@ alias fcd='find_cd'
 alias -g G='$(ghq root)/$(_src_list | peco)'
 alias -g P='$(ls | peco)'
 
-if (( ${+commands[aws_completer]} )); then
-  complete -C '/usr/local/bin/aws_completer' aws
+# kubectl
+if (( ${+commands[kubectl]} )); then
+  source <(kubectl completion zsh)
 fi

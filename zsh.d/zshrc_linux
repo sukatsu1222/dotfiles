@@ -14,12 +14,17 @@ fi
 [[ -s ${NVM_DIR}/nvm.sh ]] && source ${NVM_DIR}/nvm.sh
 [[ -s ${NVM_DIR}/bash_completion ]] && source ${NVM_DIR}/bash_completion
 
-# kubectl
-if (( ${+commands[kubectl]} )); then
-  source <(kubectl completion zsh)
-fi
-
 # helm
 if (( ${+commands[helm]} )); then
   source <(helm completion zsh)
 fi
+
+# awscli
+if (( ${+commands[aws_completer]} )); then
+  autoload bashcompinit && bashcompinit
+  autoload compinit && compinit
+  complete -C '/usr/local/bin/aws_completer' aws
+fi
+
+# gcloud
+[[ -s /usr/share/google-cloud-sdk/completion.zsh.inc ]] && source /usr/share/google-cloud-sdk/completion.zsh.inc
