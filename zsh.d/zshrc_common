@@ -1,65 +1,34 @@
 #
-# less Colours
+# Aliases
 #
-if [[ ${PAGER} == 'less' ]]; then
-  export LESS='-R -i -M -X -F'
-  export LESSCHARSET='utf-8'
-  export LESS_TERMCAP_mb=$(tput bold; tput setaf 1)    # Start blinking
-  export LESS_TERMCAP_md=$(tput bold; tput setaf 5)    # Start bold mode
-  export LESS_TERMCAP_me=$(tput sgr0)                  # End all mode like so, us, mb, md, and mr
-  export LESS_TERMCAP_so=$(tput setab 7; tput setaf 0) # Start standout mode
-  export LESS_TERMCAP_se=$(tput rmso; tput sgr0)       # End standout mode
-  export LESS_TERMCAP_us=$(tput setaf 2)               # Start underlining
-  export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)       # End underlining
-fi
-
-#
-# Aliases and functions
-#
-alias la='ls -A'          # all files
-alias ll='ls -Fhl'        # long format and human-readable sizes
-alias lla='ls -AFhl'      # long format, all files
-alias lr='ll -R'          # long format, recursive
-alias lk='ll -Sr'         # long format, largest file size last
-alias lt='ll -tr'         # long format, newest modification time last
-
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-
-alias df='df -h'
-alias du='du -h'
-
-alias nv='nvim'
-
 alias mkdir='mkdir -p'
 
-alias dk='docker'
-alias dkc='docker container'
-alias dkcl='docker container ls -a'
-alias dkcr='docker container run --rm'
-alias dkcR='docker container run --rm --publish-all --interactive --tty'
-alias dkcin='docker container inspect'
-alias dkcrm='docker container rm'
-alias dki='docker image'
-alias dkil='docker image ls -a'
-alias dkip='docker image pull'
-alias dkib='docker image build'
-alias dkiin='docker image inspect'
-alias dkirm='docker image rm'
-alias dkn='docker network'
-alias dknl='docker network ls'
-alias dknin='docker network inspect'
-alias dknrm='docker network rm'
-alias dkv='docker volume'
-alias dkvl='docker volume ls'
-alias dkvin='docker volume inspect'
-alias dkvrm='docker volume rm'
-alias dcomp='docker-compose'
-
-alias k='kubectl'
-
-function mdcd() { mkdir -p "$@" && eval cd "\"\$$#\""; }
+if (( ${+commands[docker]} )); then
+  alias dk='docker'
+  alias dkc='docker container'
+  alias dkcl='docker container ls -a'
+  alias dkcr='docker container run --rm'
+  alias dkcR='docker container run --rm --publish-all --interactive --tty'
+  alias dkcin='docker container inspect'
+  alias dkcrm='docker container rm'
+  alias dki='docker image'
+  alias dkil='docker image ls -a'
+  alias dkip='docker image pull'
+  alias dkib='docker image build'
+  alias dkiin='docker image inspect'
+  alias dkirm='docker image rm'
+  alias dkn='docker network'
+  alias dknl='docker network ls'
+  alias dknin='docker network inspect'
+  alias dknrm='docker network rm'
+  alias dkv='docker volume'
+  alias dkvl='docker volume ls'
+  alias dkvin='docker volume inspect'
+  alias dkvrm='docker volume rm'
+fi
+if (( ${+commands[docker-compose]} )); then
+    alias dcomp='docker-compose'
+fi
 
 #
 # peco
@@ -103,7 +72,17 @@ alias fcd='find_cd'
 alias -g G='$(ghq root)/$(_src_list | peco)'
 alias -g P='$(ls | peco)'
 
+#
 # kubectl
+#
 if (( ${+commands[kubectl]} )); then
+  alias k='kubectl'
   source <(kubectl completion zsh)
+fi
+
+#
+# pyenv
+#
+if (( ${+commands[pyenv]} )); then
+  eval "$(pyenv init -)"
 fi
