@@ -27,7 +27,11 @@ if (( ${+commands[docker]} )); then
   alias dkvrm='docker volume rm'
 fi
 if (( ${+commands[docker-compose]} )); then
-    alias dcomp='docker-compose'
+  alias dcomp='docker-compose'
+fi
+
+if (( ${+commands[nvim]} )); then
+  alias nv='nvim'
 fi
 
 #
