@@ -1,31 +1,51 @@
 "=============================================================================
-"" dein.vim
+"" vim-plug
 "=============================================================================
-let s:dein_dir = expand('~/.cache/dein')
-let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
-
-if !isdirectory(s:dein_repo_dir)
-  execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-execute 'set runtimepath^=' . s:dein_repo_dir
+call plug#begin()
 
-if dein#load_state(s:dein_dir)
-  let s:toml = expand('~/.config/nvim/dein.toml')
+Plug 'dracula/vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
-  call dein#begin(s:dein_dir, expand('<sfile>'))
-
-  call dein#load_toml(s:toml, {'lazy': 0})
-
-  call dein#end()
-  call dein#save_state()
-endif
-
-"" Install plugins
-if dein#check_install()
-  call dein#install()
-endif
+call plug#end()
 
 filetype plugin indent on
+
+"=============================================================================
+"" vim-airline
+"=============================================================================
+set t_Co=256
+set laststatus=2
+set noshowmode
+let g:airline_theme = 'dracula'
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
+let g:airline_skip_empty_sections = 1
+let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_powerline_fonts = 1
+
+" powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+let g:airline_symbols.maxlinenr = ''
+
+syntax on
 
 "=============================================================================
 "" Basic Configurations
@@ -70,6 +90,7 @@ set noswapfile
 "" Visual Configurations
 "=============================================================================
 colorscheme dracula
+let g:dracula_colorterm = 0
 syntax on
 "set ruler
 set number
