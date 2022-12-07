@@ -606,8 +606,8 @@ c = get_config()  # noqa
 # c.LabApp.tree_url = ''
 
 ## The directory for user settings.
-#  Default: '/Users/katsuyoshi/.jupyter/lab/user-settings'
-# c.LabApp.user_settings_dir = '/Users/katsuyoshi/.jupyter/lab/user-settings'
+#  Default: '/usr/local/Caskroom/miniforge/base/envs/jupyter/etc/jupyter/lab/user-settings'
+#　c.LabApp.user_settings_dir = '/usr/local/Caskroom/miniforge/base/envs/jupyter/etc/jupyter/lab/user-settings'
 
 ## Whether to serve the app in watch mode
 #  Default: False

@@ -22,8 +22,8 @@
     "markdownCellConfig": {
         "autoClosingBrackets": false,
         "cursorBlinkRate": 530,
-        "fontFamily": "Hack Nerd Font",
-        "fontSize": 14,
+        "fontFamily": null,
+        "fontSize": null,
         "lineHeight": null,
         "lineNumbers": false,
         "lineWrap": "on",
@@ -40,8 +40,8 @@
     "rawCellConfig": {
         "autoClosingBrackets": false,
         "cursorBlinkRate": 530,
-        "fontFamily": "Hack Nerd Font",
-        "fontSize": 14,
+        "fontFamily": null,
+        "fontSize": null,
         "lineHeight": null,
         "lineNumbers": false,
         "lineWrap": "on",
