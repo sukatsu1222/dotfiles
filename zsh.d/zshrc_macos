@@ -5,10 +5,24 @@ alias icloud="cd ${HOME}/Library/Mobile\ Documents/com~apple~CloudDocs"
 [[ -s /usr/local/opt/nvm/nvm.sh ]] && source /usr/local/opt/nvm/nvm.sh
 [[ -s /usr/local/opt/nvm/etc/bash_completion.d/nvm ]] && source /usr/local/opt/nvm/etc/bash_completion.d/nvm
 
+# Golang
+if [[ -d /usr/local/opt/go/libexec ]]; then
+    export GOROOT=/usr/local/opt/go/libexec
+fi
+if [[ -n ${GOROOT} ]]; then
+  export GOPATH=${HOME}/dev
+  path=(
+    ${GOPATH}/bin(N-/)
+    ${GOROOT}/bin(N-/)
+    $path
+  )
+fi
+
 # gcloud
 [[ -s /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc ]] && source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
 [[ -s /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc ]] && source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
 
+# python (miniforge)
 if (( ${+commands[conda]} )); then
     eval "$(conda shell.zsh hook 2> /dev/null)"
     export JUPYTERLAB_SETTINGS_DIR=${HOME}/.jupyter/lab/user-settings

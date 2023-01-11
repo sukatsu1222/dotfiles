@@ -9,6 +9,7 @@ if (( ${+commands[docker]} )); then
   alias dkcl='docker container ls -a'
   alias dkcr='docker container run --rm'
   alias dkcR='docker container run --rm --publish-all --interactive --tty'
+  alias dkclogs='docker container logs'
   alias dkcin='docker container inspect'
   alias dkcrm='docker container rm'
   alias dki='docker image'
@@ -25,9 +26,8 @@ if (( ${+commands[docker]} )); then
   alias dkvl='docker volume ls'
   alias dkvin='docker volume inspect'
   alias dkvrm='docker volume rm'
-fi
-if (( ${+commands[docker-compose]} )); then
-  alias dcomp='docker-compose'
+  alias dcomp='docker compose'
+  alias dcompup='docker compose up --detach'
 fi
 
 if (( ${+commands[nvim]} )); then
@@ -45,21 +45,6 @@ function _peco_select_history() {
 zle -N _peco_select_history
 bindkey '^r' _peco_select_history
 
-function _src_list() {
-  (
-    find ${HOME}/dev/src -not -path "${HOME}/dev/src/localhost/*" -mindepth 3 -maxdepth 3 -type d ;
-    find ${HOME}/dev/src/localhost -mindepth 1 -maxdepth 1 -type d
-    find ${HOME}/dev/src/workspace -follow -mindepth 1 -maxdepth 1 -type d
-  ) | sed -e "s#${HOME}/dev/src/##g"
-}
-function gcd() {
-  local dir=$(_src_list | peco)
-  if [ -n "${dir}" ]; then
-    BUFFER="cd \"$(ghq root)/${dir}\""
-    print -z ${BUFFER}
-  fi
-}
-
 function find_cd() {
   local dir=""
   if [[ ${PWD} = ${HOME} ]]; then
@@ -73,8 +58,6 @@ function find_cd() {
   fi
 } 2>/dev/null
 alias fcd='find_cd'
-alias -g G='$(ghq root)/$(_src_list | peco)'
-alias -g P='$(ls | peco)'
 
 #
 # kubectl
@@ -84,9 +67,7 @@ if (( ${+commands[kubectl]} )); then
   source <(kubectl completion zsh)
 fi
 
-#
-# pyenv
-#
-if (( ${+commands[pyenv]} )); then
-  eval "$(pyenv init -)"
+# helm
+if (( ${+commands[helm]} )); then
+  source <(helm completion zsh)
 fi
