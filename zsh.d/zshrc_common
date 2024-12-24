@@ -59,9 +59,7 @@ function find_cd() {
 } 2>/dev/null
 alias fcd='find_cd'
 
-#
 # kubectl
-#
 if (( ${+commands[kubectl]} )); then
   alias k='kubectl'
   source <(kubectl completion zsh)
@@ -70,4 +68,14 @@ fi
 # helm
 if (( ${+commands[helm]} )); then
   source <(helm completion zsh)
+fi
+
+# kind
+if (( ${+commands[kind]} )); then
+  source <(kind completion zsh)
+fi
+
+# kustomize
+if (( ${+commands[kustomize]} )); then
+  source <(kustomize completion zsh)
 fi
