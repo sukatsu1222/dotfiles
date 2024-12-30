@@ -29,7 +29,7 @@ fi
 # awscli
 if (( ${+commands[aws_completer]} )); then
   autoload bashcompinit && bashcompinit
-  autoload compinit && compinit
+#  autoload compinit && compinit
   complete -C '/usr/local/bin/aws_completer' aws
 fi
 
