@@ -1,7 +1,0 @@
-channels:
-  - conda-forge
-  - defaults
-channel_priority: strict
-show_channel_urls: true
-safety_checks: disabled
-auto_activate_base: false
