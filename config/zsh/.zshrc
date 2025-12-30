@@ -1,3 +1,34 @@
+# Set Zsh history file location
+export HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
+
+#
+# Zsh completions configuration
+#
+ZCOMPLETION=${XDG_DATA_HOME}/zsh/completions
+[[ ! -d ${ZCOMPLETION} ]] && mkdir -p ${ZCOMPLETION}
+
+# kubectl
+if (( ${+commands[kubectl]} )) && [[ ! -f ${ZCOMPLETION}/_kubectl ]]; then
+  kubectl completion zsh > ${ZCOMPLETION}/_kubectl
+fi
+
+# helm
+if (( ${+commands[helm]} )) && [[ ! -f ${ZCOMPLETION}/_helm ]]; then
+  helm completion zsh > ${ZCOMPLETION}/_helm
+fi
+
+# kind
+if (( ${+commands[kind]} )) && [[ ! -f ${ZCOMPLETION}/_kind ]]; then
+  kind completion zsh > ${ZCOMPLETION}/_kind
+fi
+
+# kustomize
+if (( ${+commands[kustomize]} )) && [[ ! -f ${ZCOMPLETION}/_kustomize ]]; then
+  kustomize completion zsh > ${ZCOMPLETION}/_kustomize
+fi
+
+fpath=(${ZCOMPLETION} $fpath)
+
 # Start configuration added by Zim install {{{
 #
 # User configuration sourced by interactive shells
@@ -106,25 +137,24 @@ if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
 fi
 # Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
 if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
-  source ${ZIM_HOME}/zimfw.zsh init -q
+  source ${ZIM_HOME}/zimfw.zsh init
 fi
 # Initialize modules.
 source ${ZIM_HOME}/init.zsh
-
-# ------------------------------
-# Post-init module configuration
-# ------------------------------
-
-#
-# zsh-history-substring-search
-#
-
-zmodload -F zsh/terminfo +p:terminfo
-# Bind ^[[A/^[[B manually so up/down works both before and after zle-line-init
-for key ('^[[A' '^P' ${terminfo[kcuu1]}) bindkey ${key} history-substring-search-up
-for key ('^[[B' '^N' ${terminfo[kcud1]}) bindkey ${key} history-substring-search-down
-for key ('k') bindkey -M vicmd ${key} history-substring-search-up
-for key ('j') bindkey -M vicmd ${key} history-substring-search-down
-unset key
 # }}} End configuration added by Zim install
 
+
+# Read other setting
+case ${OSTYPE} in
+  darwin*)
+    [[ -s ${ZDOTDIR}/zshrc_macos ]] && source ${ZDOTDIR}/zshrc_macos
+    ;;
+  linux*)
+    [[ -s ${ZDOTDIR}/zshrc_linux ]] && source ${ZDOTDIR}/zshrc_linux
+    ;;
+esac
+[[ -s ${ZDOTDIR}/zshrc_common ]] && source ${ZDOTDIR}/zshrc_common
+
+if (( ${+commands[zprof]} )); then
+  zprof | less
+fi
