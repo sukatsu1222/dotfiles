@@ -4,7 +4,7 @@ export HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 #
 # Zsh completions configuration
 #
-ZCOMPLETION=${XDG_DATA_HOME}/zsh/completions
+ZCOMPLETION=${HOME}/.local/share/zsh/completions
 [[ ! -d ${ZCOMPLETION} ]] && mkdir -p ${ZCOMPLETION}
 
 # kubectl
@@ -158,3 +158,4 @@ esac
 if (( ${+commands[zprof]} )); then
   zprof | less
 fi
+

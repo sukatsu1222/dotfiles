@@ -48,9 +48,9 @@ bindkey '^r' _peco_select_history
 function find_cd() {
   local dir=""
   if [[ ${PWD} = ${HOME} ]]; then
-    dir=$(find ${HOME} -not -path "${HOME}/.*" -not -path "${HOME}/Library/*" -type d -maxdepth 3 | peco)
+    dir=$(find ${HOME} -not -path "${HOME}/.*" -not -path "${HOME}/Library/*" -type d -maxdepth 3 | /usr/local/bin/peco)
   else
-    dir=$(find ${PWD} -type d -maxdepth 3 | peco)
+    dir=$(find ${PWD} -type d -maxdepth 3 | /usr/local/bin/peco)
   fi
   if [ -n "${dir}" ]; then
     BUFFER="cd \"${dir}\""
