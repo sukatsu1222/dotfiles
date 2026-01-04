@@ -1,3 +1,12 @@
+# Node Version Manager (NVM)
+NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+if [[ -d ${NVM_DIR} ]]; then
+  export NVM_DIR
+fi
+[[ -s ${NVM_DIR}/nvm.sh ]] && source ${NVM_DIR}/nvm.sh
+[[ -s ${NVM_DIR}/bash_completion ]] && source ${NVM_DIR}/bash_completion
+
+
 #
 # Aliases
 #
@@ -48,9 +57,9 @@ bindkey '^r' _peco_select_history
 function find_cd() {
   local dir=""
   if [[ ${PWD} = ${HOME} ]]; then
-    dir=$(find ${HOME} -not -path "${HOME}/.*" -not -path "${HOME}/Library/*" -type d -maxdepth 3 | /usr/local/bin/peco)
+    dir=$(find ${HOME} -not -path "${HOME}/.*" -not -path "${HOME}/Library/*" -type d -maxdepth 3 | peco)
   else
-    dir=$(find ${PWD} -type d -maxdepth 3 | /usr/local/bin/peco)
+    dir=$(find ${PWD} -type d -maxdepth 3 | peco)
   fi
   if [ -n "${dir}" ]; then
     BUFFER="cd \"${dir}\""
