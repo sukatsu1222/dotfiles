@@ -47,7 +47,15 @@ for dot_file in ${DOT_DIR}/*; do
     *.md ) continue ;;
     config )
       for config_dir in $dot_file/*; do
-        target=${HOME}/.config/$(basename $config_dir)
+        config_name=$(basename $config_dir)
+        # ghostty と karabiner は macOS のみ
+        if [[ "$config_name" == "ghostty" || "$config_name" == "karabiner" ]]; then
+          if [[ "$(uname)" != "Darwin" ]]; then
+            gray "Skip $config_name (macOS only)"
+            continue
+          fi
+        fi
+        target=${HOME}/.config/$config_name
         create_symlink $config_dir $target
       done
       ;;

@@ -1,0 +1,22 @@
+theme = Dracula
+font-family = HackGen Console NF
+font-feature = -dlig
+font-size = 16
+font-thicken = true
+
+background-opacity = 0.9
+background-blur-radius = 15
+
+window-padding-x = 10
+window-padding-y = 10
+window-padding-balance = true
+
+#adjust-cell-width = 1
+adjust-cell-height = 5%
+shell-integration-features = no-cursor
+cursor-style = block
+
+copy-on-select = clipboard
+clipboard-read = allow
+clipboard-write = allow
+clipboard-trim-trailing-spaces = true

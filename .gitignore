@@ -19,3 +19,10 @@
 
 # tmux plugins
 config/tmux/plugins/
+
+#================================================
+# Karabiner Elements
+#================================================
+
+# Karabiner Elements automatic backups
+config/karabiner/automatic_backups
