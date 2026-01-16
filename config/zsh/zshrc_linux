@@ -1,2 +1,7 @@
 # AC Library (c++)
 ulimit -s unlimited
+
+# Start tmux if installed, login shell, and not already in a tmux session
+if [[ -o login ]] && (( ${+commands[tmux]} )) && [[ -z "${TMUX}" ]]; then
+  tmux attach -t default || tmux new -s default
+fi
