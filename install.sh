@@ -19,7 +19,8 @@ fi
 ZIM_HOME="${HOME}/.config/zsh/.zim"
 if [[ ! -d "${ZIM_HOME}" ]]; then
   echo "Installing zimfw..."
-  curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | ZIM_HOME="${ZIM_HOME}" zsh
+  curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
+        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
 else
   echo "zimfw is already installed."
 fi
