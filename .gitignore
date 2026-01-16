@@ -1,8 +1,21 @@
-# jupyter
-jupyter/migrated
-jupyter/lab/workspaces/*
+#================================================
+# ZSH
+#================================================
 
-# zsh
-.zcompdump*
-.zim/
+# zsh history
 .zsh_history
+.zsh_sessions/
+
+# zsh cache files
+.zcompdump*
+.zcompcache/
+
+# zim zsh framework
+.zim/
+
+#================================================
+# tmux
+#================================================
+
+# tmux plugins
+config/tmux/plugins/
