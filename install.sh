@@ -10,6 +10,10 @@ if [[ "$(uname -s)" == "Linux" ]]; then
   if [[ ! -d "${TPM_DIR}" ]]; then
     echo "Installing TPM (Tmux Plugin Manager)..."
     git clone https://github.com/tmux-plugins/tpm "${TPM_DIR}"
+    echo ""
+    echo "TPM installed successfully!"
+    echo "To install tmux plugins, start tmux and press:"
+    echo "  prefix + I (capital i)"
   else
     echo "TPM is already installed."
   fi
