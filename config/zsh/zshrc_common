@@ -1,69 +1,68 @@
-# Node Version Manager (NVM)
-NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-if [[ -d ${NVM_DIR} ]]; then
-  export NVM_DIR
-fi
-[[ -s ${NVM_DIR}/nvm.sh ]] && source ${NVM_DIR}/nvm.sh
-[[ -s ${NVM_DIR}/bash_completion ]] && source ${NVM_DIR}/bash_completion
-
-
 #
 # Aliases
 #
+
+# Always create parent directories when using mkdir
 alias mkdir='mkdir -p'
 
+# Docker command aliases (only if docker is installed)
 if (( ${+commands[docker]} )); then
+  # Basic docker command
   alias dk='docker'
+
+  # Container management
   alias dkc='docker container'
-  alias dkcl='docker container ls -a'
-  alias dkcr='docker container run --rm'
-  alias dkcR='docker container run --rm --publish-all --interactive --tty'
+  alias dkcl='docker container ls -a'                                           # List all containers
+  alias dkcr='docker container run --rm'                                        # Run container and remove after exit
+  alias dkcR='docker container run --rm --publish-all --interactive --tty'      # Run interactive container with all ports published
   alias dkclogs='docker container logs'
   alias dkcin='docker container inspect'
   alias dkcrm='docker container rm'
+
+  # Image management
   alias dki='docker image'
-  alias dkil='docker image ls -a'
+  alias dkil='docker image ls -a'                                               # List all images
   alias dkip='docker image pull'
   alias dkib='docker image build'
   alias dkiin='docker image inspect'
   alias dkirm='docker image rm'
+
+  # Network management
   alias dkn='docker network'
   alias dknl='docker network ls'
   alias dknin='docker network inspect'
   alias dknrm='docker network rm'
+
+  # Volume management
   alias dkv='docker volume'
   alias dkvl='docker volume ls'
   alias dkvin='docker volume inspect'
   alias dkvrm='docker volume rm'
+
+  # Docker Compose
   alias dcomp='docker compose'
-  alias dcompup='docker compose up --detach'
+  alias dcompup='docker compose up --detach'                                    # Start services in detached mode
 fi
 
+# Kubernetes command alias (only if kubectl is installed)
+if (( ${+commands[kubectl]} )); then
+  alias k='kubectl'
+fi
+
+# Neovim command alias (only if nvim is installed)
 if (( ${+commands[nvim]} )); then
   alias nv='nvim'
 fi
 
-#
-# peco
-#
-function _peco_select_history() {
-  BUFFER=$(fc -l -n -r 1 | peco --query "$LBUFFER")
-  CURSOR=$#BUFFER
-  zle -R -c
-}
-zle -N _peco_select_history
-bindkey '^r' _peco_select_history
+# mise (formerly rtx) initialization and aliases
+if (( ${+commands[mise]} )); then
+  # Activate mise for zsh
+  eval "$(mise activate zsh)"
 
-function find_cd() {
-  local dir=""
-  if [[ ${PWD} = ${HOME} ]]; then
-    dir=$(find ${HOME} -not -path "${HOME}/.*" -not -path "${HOME}/Library/*" -type d -maxdepth 3 | peco)
-  else
-    dir=$(find ${PWD} -type d -maxdepth 3 | peco)
-  fi
-  if [ -n "${dir}" ]; then
-    BUFFER="cd \"${dir}\""
-    print -z ${BUFFER}
-  fi
-} 2>/dev/null
-alias fcd='find_cd'
+  # mise command aliases
+  alias mi='mise'
+  alias mii='mise install'                                                      # Install tool versions
+  alias miu='mise use'                                                          # Set tool version for project
+  alias mil='mise ls'                                                           # List installed tools
+  alias mir='mise run'                                                          # Run tasks defined in mise configuration
+fi

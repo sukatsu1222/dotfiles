@@ -1,9 +1,9 @@
 # Set Zsh history file location
 export HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 
-#
+# -----------------------------------------------------------------------------
 # Zsh completions configuration
-#
+# -----------------------------------------------------------------------------
 ZCOMPLETION=${HOME}/.local/share/zsh/completions
 [[ ! -d ${ZCOMPLETION} ]] && mkdir -p ${ZCOMPLETION}
 
@@ -25,6 +25,11 @@ fi
 # kustomize
 if (( ${+commands[kustomize]} )) && [[ ! -f ${ZCOMPLETION}/_kustomize ]]; then
   kustomize completion zsh > ${ZCOMPLETION}/_kustomize
+fi
+
+# mise
+if (( ${+commands[mise]} )) && [[ ! -f ${ZCOMPLETION}/_mise ]]; then
+  mise completion zsh > ${ZCOMPLETION}/_mise
 fi
 
 fpath=(${ZCOMPLETION} $fpath)
@@ -158,4 +163,3 @@ esac
 if (( ${+commands[zprof]} )); then
   zprof | less
 fi
-
