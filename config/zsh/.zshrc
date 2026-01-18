@@ -1,38 +1,8 @@
 # Set Zsh history file location
 export HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 
-# -----------------------------------------------------------------------------
-# Zsh completions configuration
-# -----------------------------------------------------------------------------
-ZCOMPLETION=${HOME}/.local/share/zsh/completions
-[[ ! -d ${ZCOMPLETION} ]] && mkdir -p ${ZCOMPLETION}
-
-# kubectl
-if (( ${+commands[kubectl]} )) && [[ ! -f ${ZCOMPLETION}/_kubectl ]]; then
-  kubectl completion zsh > ${ZCOMPLETION}/_kubectl
-fi
-
-# helm
-if (( ${+commands[helm]} )) && [[ ! -f ${ZCOMPLETION}/_helm ]]; then
-  helm completion zsh > ${ZCOMPLETION}/_helm
-fi
-
-# kind
-if (( ${+commands[kind]} )) && [[ ! -f ${ZCOMPLETION}/_kind ]]; then
-  kind completion zsh > ${ZCOMPLETION}/_kind
-fi
-
-# kustomize
-if (( ${+commands[kustomize]} )) && [[ ! -f ${ZCOMPLETION}/_kustomize ]]; then
-  kustomize completion zsh > ${ZCOMPLETION}/_kustomize
-fi
-
-# mise
-if (( ${+commands[mise]} )) && [[ ! -f ${ZCOMPLETION}/_mise ]]; then
-  mise completion zsh > ${ZCOMPLETION}/_mise
-fi
-
-fpath=(${ZCOMPLETION} $fpath)
+# Load completions configuration
+[[ -s ${ZDOTDIR}/completions.zsh ]] && source ${ZDOTDIR}/completions.zsh
 
 # Start configuration added by Zim install {{{
 #
@@ -149,16 +119,16 @@ source ${ZIM_HOME}/init.zsh
 # }}} End configuration added by Zim install
 
 
-# Read other setting
+# Load OS-specific and common configurations
 case ${OSTYPE} in
   darwin*)
-    [[ -s ${ZDOTDIR}/zshrc_macos ]] && source ${ZDOTDIR}/zshrc_macos
+    [[ -s ${ZDOTDIR}/macos.zsh ]] && source ${ZDOTDIR}/macos.zsh
     ;;
   linux*)
-    [[ -s ${ZDOTDIR}/zshrc_linux ]] && source ${ZDOTDIR}/zshrc_linux
+    [[ -s ${ZDOTDIR}/linux.zsh ]] && source ${ZDOTDIR}/linux.zsh
     ;;
 esac
-[[ -s ${ZDOTDIR}/zshrc_common ]] && source ${ZDOTDIR}/zshrc_common
+[[ -s ${ZDOTDIR}/aliases.zsh ]] && source ${ZDOTDIR}/aliases.zsh
 
 if (( ${+commands[zprof]} )); then
   zprof | less

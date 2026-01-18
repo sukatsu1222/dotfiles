@@ -1,6 +1,6 @@
-#
-# Aliases
-#
+# -----------------------------------------------------------------------------
+# Aliases configuration
+# -----------------------------------------------------------------------------
 
 # Always create parent directories when using mkdir
 alias mkdir='mkdir -p'
@@ -61,8 +61,8 @@ if (( ${+commands[mise]} )); then
 
   # mise command aliases
   alias mi='mise'
-  alias mii='mise install'                                                      # Install tool versions
-  alias miu='mise use'                                                          # Set tool version for project
-  alias mil='mise ls'                                                           # List installed tools
-  alias mir='mise run'                                                          # Run tasks defined in mise configuration
+  alias mii='mise install'        # Install tool versions
+  alias miu='mise use'            # Set tool version for project
+  alias mil='mise ls'             # List installed tools
+  alias mir='mise run'            # Run tasks defined in mise configuration
 fi
