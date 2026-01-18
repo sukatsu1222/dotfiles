@@ -1,22 +1,64 @@
+# =============================================================================
+# Ghostty Configuration
+# Theme: Dracula | Font: HackGen Console NF | Shell: zsh + zimfw + pure
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Theme & Colors
+# -----------------------------------------------------------------------------
 theme = Dracula
-font-family = HackGen Console NF
-font-feature = -dlig
+
+# -----------------------------------------------------------------------------
+# Font Settings
+# -----------------------------------------------------------------------------
+font-family = "HackGen Console NF"
 font-size = 16
-font-thicken = true
 
-background-opacity = 0.9
-background-blur-radius = 15
+# -----------------------------------------------------------------------------
+# Background & Transparency
+# -----------------------------------------------------------------------------
+# Set background opacity (0.0 = fully transparent, 1.0 = fully opaque)
+background-opacity = 0.95
 
+# Apply opacity to cell backgrounds as well
+background-opacity-cells = true
+
+# -----------------------------------------------------------------------------
+# Window Settings
+# -----------------------------------------------------------------------------
+# Padding around the terminal content
 window-padding-x = 10
 window-padding-y = 10
-window-padding-balance = true
 
-#adjust-cell-width = 1
-adjust-cell-height = 5%
-shell-integration-features = no-cursor
+# macOS-specific: Show tabs in titlebar
+macos-titlebar-style = tabs
+
+# Quit Ghostty when the last window is closed
+quit-after-last-window-closed = true
+
+# -----------------------------------------------------------------------------
+# Cursor Settings
+# -----------------------------------------------------------------------------
 cursor-style = block
+cursor-style-blink = false
 
+# -----------------------------------------------------------------------------
+# Shell Integration (zsh + zimfw + pure)
+# -----------------------------------------------------------------------------
+# Features:
+#   - no-cursor: Disable automatic cursor style changes (managed manually)
+#   - sudo: Preserve terminal info when using sudo
+#   - title: Update window title with current directory/command
+shell-integration-features = no-cursor,sudo,title
+
+# -----------------------------------------------------------------------------
+# Clipboard & Selection
+# -----------------------------------------------------------------------------
+# Copy selected text to clipboard automatically
 copy-on-select = clipboard
-clipboard-read = allow
-clipboard-write = allow
-clipboard-trim-trailing-spaces = true
+
+# -----------------------------------------------------------------------------
+# Auto-Update Settings
+# -----------------------------------------------------------------------------
+auto-update = check
+auto-update-channel = stable
