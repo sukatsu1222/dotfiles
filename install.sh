@@ -29,5 +29,33 @@ else
   echo "zimfw is already installed."
 fi
 
+# Install LazyVim
+NVIM_CONFIG="${HOME}/.config/nvim"
+LAZYVIM_MARKER="${NVIM_CONFIG}/lua/config/lazy.lua"
+if [[ ! -f "${LAZYVIM_MARKER}" ]]; then
+  echo "Installing LazyVim..."
+
+  # Backup existing Neovim config if it exists
+  if [[ -d "${NVIM_CONFIG}" ]]; then
+    echo "Backing up existing Neovim config to ${NVIM_CONFIG}.bak..."
+    mv "${NVIM_CONFIG}" "${NVIM_CONFIG}.bak"
+  fi
+
+  # Clone LazyVim starter template
+  git clone https://github.com/LazyVim/starter "${NVIM_CONFIG}"
+
+  # Remove .git directory from starter template
+  rm -rf "${NVIM_CONFIG}/.git"
+
+  # Deploy dotfiles config (this will symlink our custom config)
+  source ${DOT_DIR}/deploy.sh
+
+  echo "LazyVim installed successfully!"
+  echo "Start Neovim to complete the installation:"
+  echo "  nvim"
+else
+  echo "LazyVim is already installed."
+fi
+
 echo ""
 echo "Installation Finished"
