@@ -130,6 +130,16 @@ case ${OSTYPE} in
 esac
 [[ -s ${ZDOTDIR}/aliases.zsh ]] && source ${ZDOTDIR}/aliases.zsh
 
+# Initialize mise (development tools version manager)
+if (( ${+commands[mise]} )); then
+  eval "$(mise activate zsh)"
+fi
+
+# Initialize zoxide (smart directory navigation)
+if (( ${+commands[zoxide]} )); then
+  eval "$(zoxide init zsh)"
+fi
+
 if (( ${+commands[zprof]} )); then
   zprof | less
 fi
