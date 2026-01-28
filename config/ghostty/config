@@ -26,12 +26,19 @@ background-opacity-cells = true
 # -----------------------------------------------------------------------------
 # Window Settings
 # -----------------------------------------------------------------------------
+# Window size (in cells)
+window-width = 120
+window-height = 35
+
 # Padding around the terminal content
 window-padding-x = 10
 window-padding-y = 10
 
 # macOS-specific: Show tabs in titlebar
 macos-titlebar-style = tabs
+
+# Save and restore window state on restart
+window-save-state = always
 
 # Quit Ghostty when the last window is closed
 quit-after-last-window-closed = true

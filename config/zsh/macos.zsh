@@ -4,12 +4,12 @@
 
 # eza (modern ls replacement)
 if (( ${+commands[eza]} )); then
-  alias ls='eza --icons --git'
-  alias la='eza --icons --git --all'
-  alias ll='eza --icons --git --long --header --git'
-  alias lla='eza --icons --git --long --header --git --all'
-  alias lt='eza --icons --git --tree --level=2'
-  alias lta='eza --icons --git --tree --level=2 --all'
+  alias ls='eza --git'
+  alias la='eza --git --all'
+  alias ll='eza --git --long --header --git'
+  alias lla='eza --git --long --header --git --all'
+  alias lt='eza --git --tree --level=2'
+  alias lta='eza --git --tree --level=2 --all'
 else
   # Fallback to standard ls with color on macOS
   alias ls="ls -G"
@@ -17,8 +17,8 @@ fi
 
 # bat (modern cat replacement)
 if (( ${+commands[bat]} )); then
-  alias cat='bat --style=auto'
-  alias bcat='bat --style=plain'  # Plain output without decorations
+  alias cat='bat --style=numbers,header'  # 罫線なし、行番号とヘッダーのみ
+  alias bcat='bat --style=plain'          # すべての装飾なし
 fi
 
 # Quick access to iCloud Drive folder
