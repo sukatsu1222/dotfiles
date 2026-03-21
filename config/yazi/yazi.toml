@@ -1,0 +1,10 @@
+[manager]
+show_hidden = true        # Show hidden files
+sort_by = "modified"      # Sort by modification time
+sort_reverse = true       # Newest first
+sort_dir_first = true     # Show directories first
+
+[preview]
+tab_size = 2
+max_width = 600
+max_height = 900

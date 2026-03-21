@@ -274,3 +274,16 @@ if (( ${+commands[fzf]} )); then
   # Search command history with fzf (Ctrl+R is default, this is for manual use)
   alias hist='history | fzf --tac --no-sort'
 fi
+
+
+# -----------------------------------------------------------------------------
+# yazi function
+# -----------------------------------------------------------------------------
+
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}

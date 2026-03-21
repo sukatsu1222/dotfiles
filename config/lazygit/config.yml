@@ -1,0 +1,344 @@
+# =============================================================================
+# Lazygit Configuration
+# Theme: Dracula | Font: HackGen Console NF | Shell: zsh
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# GUI Settings
+# -----------------------------------------------------------------------------
+gui:
+  # Nerd Fonts version (3 for latest)
+  nerdFontsVersion: 3
+
+  # Show command log
+  showCommandLog: true
+
+  # Show file tree in file panel
+  showFileTree: true
+
+  # Show random tip on startup
+  showRandomTip: false
+
+  # Mouse events enabled
+  mouseEvents: true
+
+  # Skip discard warning
+  skipDiscardChangeWarning: false
+
+  # Skip stash warning
+  skipStashWarning: false
+
+  # Skip no staged files warning
+  skipNoStagedFilesWarning: false
+
+  # Skip rewording commit warning
+  skipRewordInEditorWarning: false
+
+  # Border style: single, double, rounded, hidden
+  border: rounded
+
+  # Dracula color scheme
+  theme:
+    lightTheme: false
+    activeBorderColor:
+      - '#ff79c6'  # Dracula pink
+      - bold
+    inactiveBorderColor:
+      - '#6272a4'  # Dracula comment
+    optionsTextColor:
+      - '#8be9fd'  # Dracula cyan
+    selectedLineBgColor:
+      - '#44475a'  # Dracula selection
+    selectedRangeBgColor:
+      - '#44475a'  # Dracula selection
+    cherryPickedCommitBgColor:
+      - '#8be9fd'  # Dracula cyan
+    cherryPickedCommitFgColor:
+      - '#282a36'  # Dracula background
+    unstagedChangesColor:
+      - '#ff5555'  # Dracula red
+    defaultFgColor:
+      - '#f8f8f2'  # Dracula foreground
+    searchingActiveBorderColor:
+      - '#f1fa8c'  # Dracula yellow
+
+# -----------------------------------------------------------------------------
+# Git Settings
+# -----------------------------------------------------------------------------
+git:
+  # Paging
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
+    useConfig: false
+    externalDiffCommand: ''
+
+  # Commit settings
+  commit:
+    signOff: false
+    autoWrapCommitMessage: true
+    autoWrapWidth: 72
+
+  # Merging
+  merging:
+    # Manual commit after merge
+    manualCommit: false
+    # Args for merge command
+    args: ''
+
+  # Pull settings
+  pull:
+    # Use rebase by default
+    mode: 'merge'  # 'merge', 'rebase', or 'ff-only'
+
+  # Fetch settings
+  fetchAll: true
+
+  # Auto fetch
+  autoFetch: true
+  autoRefresh: true
+
+  # Branch log order: date-order, author-date-order, topo-order, default
+  branchLogCmd: 'git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --'
+
+  # All branches log
+  allBranchesLogCmd: 'git log --graph --all --color=always --abbrev-commit --decorate --date=relative --pretty=medium'
+
+  # Override git command
+  overrideGpg: false
+
+  # Disable force pushing
+  disableForcePushing: false
+
+  # Parse emoji from commit messages
+  parseEmoji: true
+
+  # Diff context size
+  diffContextSize: 3
+
+# -----------------------------------------------------------------------------
+# Update Settings
+# -----------------------------------------------------------------------------
+update:
+  method: never  # never, prompt, background
+  days: 0
+
+# -----------------------------------------------------------------------------
+# Refresh Settings
+# -----------------------------------------------------------------------------
+refresher:
+  refreshInterval: 10  # seconds
+  fetchInterval: 60    # seconds
+
+# -----------------------------------------------------------------------------
+# Confirmation Settings
+# -----------------------------------------------------------------------------
+confirmOnQuit: false
+quitOnTopLevelReturn: false
+
+# -----------------------------------------------------------------------------
+# Keybindings
+# -----------------------------------------------------------------------------
+keybinding:
+  universal:
+    quit: 'q'
+    quit-alt1: '<c-c>'
+    return: '<esc>'
+    quitWithoutChangingDirectory: 'Q'
+    togglePanel: '<tab>'
+    prevItem: '<up>'
+    nextItem: '<down>'
+    prevItem-alt: 'k'
+    nextItem-alt: 'j'
+    prevPage: ','
+    nextPage: '.'
+    scrollLeft: 'H'
+    scrollRight: 'L'
+    gotoTop: '<'
+    gotoBottom: '>'
+    toggleRangeSelect: 'v'
+    rangeSelectDown: '<s-down>'
+    rangeSelectUp: '<s-up>'
+    prevBlock: '<left>'
+    nextBlock: '<right>'
+    prevBlock-alt: 'h'
+    nextBlock-alt: 'l'
+    nextBlock-alt2: '<tab>'
+    prevBlock-alt2: '<backtab>'
+    jumpToBlock: ['1', '2', '3', '4', '5']
+    nextMatch: 'n'
+    prevMatch: 'N'
+    startSearch: '/'
+    optionMenu: '?'
+    optionMenu-alt1: '<c-s>'
+    select: '<space>'
+    goInto: '<enter>'
+    confirm: '<enter>'
+    remove: 'd'
+    new: 'n'
+    edit: 'e'
+    openFile: 'o'
+    scrollUpMain: '<pgup>'
+    scrollDownMain: '<pgdown>'
+    scrollUpMain-alt1: 'K'
+    scrollDownMain-alt1: 'J'
+    scrollUpMain-alt2: '<c-u>'
+    scrollDownMain-alt2: '<c-d>'
+    executeCustomCommand: ':'
+    createRebaseOptionsMenu: 'm'
+    pushFiles: 'P'
+    pullFiles: 'p'
+    refresh: 'R'
+    createPatchOptionsMenu: '<c-p>'
+    nextTab: ']'
+    prevTab: '['
+    nextScreenMode: '+'
+    prevScreenMode: '_'
+    undo: 'z'
+    redo: '<c-z>'
+    filteringMenu: '<c-f>'
+    diffingMenu: 'W'
+    diffingMenu-alt: '<c-e>'
+    copyToClipboard: '<c-o>'
+    openRecentRepos: '<c-r>'
+    submitEditorText: '<enter>'
+    extrasMenu: '@'
+    toggleWhitespaceInDiffView: '<c-w>'
+    increaseContextInDiffView: '}'
+    decreaseContextInDiffView: '{'
+
+  status:
+    checkForUpdate: 'u'
+    recentRepos: '<enter>'
+    allBranchesLogGraph: 'a'
+
+  files:
+    commitChanges: 'c'
+    commitChangesWithoutHook: 'w'
+    amendLastCommit: 'A'
+    commitChangesWithEditor: 'C'
+    findBaseCommitForFixup: '<c-f>'
+    confirmDiscard: 'x'
+    ignoreFile: 'i'
+    refreshFiles: 'r'
+    stashAllChanges: 's'
+    viewStashOptions: 'S'
+    toggleStagedAll: 'a'
+    viewResetOptions: 'D'
+    fetch: 'f'
+    toggleTreeView: '`'
+    openMergeTool: 'M'
+    openStatusFilter: '<c-b>'
+
+  branches:
+    createPullRequest: 'o'
+    viewPullRequestOptions: 'O'
+    copyPullRequestURL: '<c-y>'
+    checkoutBranchByName: 'c'
+    forceCheckoutBranch: 'F'
+    rebaseBranch: 'r'
+    renameBranch: 'R'
+    mergeIntoCurrentBranch: 'M'
+    viewGitFlowOptions: 'i'
+    fastForward: 'f'
+    createTag: 'T'
+    pushTag: 'P'
+    setUpstream: 'u'
+    fetchRemote: 'f'
+
+  commits:
+    squashDown: 's'
+    renameCommit: 'r'
+    renameCommitWithEditor: 'R'
+    viewResetOptions: 'g'
+    markCommitAsFixup: 'f'
+    createFixupCommit: 'F'
+    squashAboveCommits: 'S'
+    moveDownCommit: '<c-j>'
+    moveUpCommit: '<c-k>'
+    amendToCommit: 'A'
+    pickCommit: 'p'
+    revertCommit: 't'
+    cherryPickCopy: 'C'
+    pasteCommits: 'V'
+    tagCommit: 'T'
+    checkoutCommit: '<space>'
+    resetCherryPick: '<c-R>'
+    copyCommitMessageToClipboard: '<c-y>'
+    openLogMenu: '<c-l>'
+    viewBisectOptions: 'b'
+
+  stash:
+    popStash: 'g'
+    renameStash: 'r'
+
+  commitFiles:
+    checkoutCommitFile: 'c'
+
+  main:
+    toggleSelectHunk: 'a'
+    pickBothHunks: 'b'
+
+  submodules:
+    init: 'i'
+    update: 'u'
+    bulkMenu: 'b'
+
+# -----------------------------------------------------------------------------
+# OS Settings
+# -----------------------------------------------------------------------------
+os:
+  # Editor command (uses EDITOR environment variable by default)
+  edit: '{{editor}} {{filename}}'
+  editAtLine: '{{editor}} +{{line}} {{filename}}'
+  editAtLineAndWait: '{{editor}} +{{line}} {{filename}}'
+  open: 'open {{filename}}'
+  openLink: 'open {{link}}'
+
+  # Custom commands
+  editPreset: ''
+
+# -----------------------------------------------------------------------------
+# Custom Commands
+# -----------------------------------------------------------------------------
+customCommands:
+  - key: '<c-g>'
+    command: 'git-ghq-cd'
+    context: 'global'
+    description: 'Jump to ghq repository'
+    subprocess: true
+
+  - key: '<c-t>'
+    command: 'tig'
+    context: 'global'
+    description: 'Open tig'
+    subprocess: true
+
+  - key: 'b'
+    command: 'git browse {{.SelectedLocalCommit.Sha}}'
+    context: 'commits'
+    description: 'Open commit in browser'
+    subprocess: false
+
+  - key: 'B'
+    command: 'git browse {{.SelectedLocalBranch.Name}}'
+    context: 'branches'
+    description: 'Open branch in browser'
+    subprocess: false
+
+# -----------------------------------------------------------------------------
+# Prompt on Quit
+# -----------------------------------------------------------------------------
+notARepository: 'skip'  # 'skip', 'prompt', 'quit'
+
+# -----------------------------------------------------------------------------
+# Disable start-up popups
+# -----------------------------------------------------------------------------
+disableStartupPopups: false
+
+# -----------------------------------------------------------------------------
+# Log to file for debugging
+# -----------------------------------------------------------------------------
+# Uncomment to enable logging
+# logPath: '~/.config/lazygit/lazygit.log'
+# logLevel: 'debug'  # 'trace', 'debug', 'info', 'warn', 'error'

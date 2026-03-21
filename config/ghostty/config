@@ -69,3 +69,18 @@ copy-on-select = clipboard
 # -----------------------------------------------------------------------------
 auto-update = check
 auto-update-channel = stable
+
+# -----------------------------------------------------------------------------
+# Key Bindings
+# -----------------------------------------------------------------------------
+# Vim-style split navigation (super + shift + hjkl)
+keybind = super+shift+j=goto_split:down
+keybind = super+shift+k=goto_split:up
+keybind = super+shift+h=goto_split:left
+keybind = super+shift+l=goto_split:right
+
+# Vim-style split resizing (super + ctrl + hjkl)
+keybind = super+ctrl+h=resize_split:left,10
+keybind = super+ctrl+j=resize_split:down,10
+keybind = super+ctrl+k=resize_split:up,10
+keybind = super+ctrl+l=resize_split:right,10
