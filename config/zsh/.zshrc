@@ -135,6 +135,11 @@ if (( ${+commands[mise]} )); then
   eval "$(mise activate zsh)"
 fi
 
+# Initialize fzf shell integration (Ctrl+R, Ctrl+T, Alt+C)
+if (( ${+commands[fzf]} )); then
+  eval "$(fzf --zsh)"
+fi
+
 # Initialize zoxide (smart directory navigation)
 if (( ${+commands[zoxide]} )); then
   eval "$(zoxide init zsh)"
