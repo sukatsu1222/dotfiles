@@ -26,3 +26,23 @@ config/tmux/plugins/
 
 # Karabiner Elements automatic backups
 config/karabiner/automatic_backups
+
+#================================================
+# neovim
+#================================================
+
+# nvim-plug plugins
+config/nvim/plugged/
+
+#================================================
+# Yazi
+#================================================
+
+# yazi plugins and flavors (managed separately)
+config/yazi/plugins/
+config/yazi/flavors/
+
+# yazi cache
+.yazi/
+*.yazi-cache/
+
