@@ -24,7 +24,7 @@ ZIM_HOME="${HOME}/.config/zsh/.zim"
 if [[ ! -d "${ZIM_HOME}" ]]; then
   green "Installing zimfw..."
   curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
-        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+    https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
 else
   echo "zimfw is already installed."
 fi
@@ -55,6 +55,18 @@ if [[ ! -f "${LAZYVIM_MARKER}" ]]; then
   green "  nvim"
 else
   echo "LazyVim is already installed."
+fi
+
+# Install Yazi flavors
+YAZI_FLAVORS_DIR="${HOME}/.config/yazi/flavors"
+mkdir -p "${YAZI_FLAVORS_DIR}"
+
+DRACULA_FLAVOR="${YAZI_FLAVORS_DIR}/dracula.yazi"
+if [[ ! -d "${DRACULA_FLAVOR}" ]]; then
+  green "Installing Yazi dracula flavor..."
+  git clone https://github.com/dracula/yazi.git "${DRACULA_FLAVOR}"
+else
+  echo "Yazi dracula flavor is already installed."
 fi
 
 echo ""
