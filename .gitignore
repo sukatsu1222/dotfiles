@@ -46,3 +46,12 @@ config/yazi/flavors/
 .yazi/
 *.yazi-cache/
 
+#================================================
+# Claude Code
+#================================================
+
+# Ignore everything in claude/ except managed files
+claude/*
+!claude/CLAUDE.md
+!claude/settings.json
+
