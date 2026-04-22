@@ -54,4 +54,5 @@ config/yazi/flavors/
 claude/*
 !claude/CLAUDE.md
 !claude/settings.json
+!claude/statusline-command.sh
 
