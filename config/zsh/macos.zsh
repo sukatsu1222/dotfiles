@@ -17,7 +17,7 @@ fi
 
 # bat (modern cat replacement)
 if (( ${+commands[bat]} )); then
-  alias cat='bat --style=numbers,header'  # 罫線なし、行番号とヘッダーのみ
+  alias cat='bat'
   alias bcat='bat --style=plain'          # すべての装飾なし
 fi
 
@@ -26,4 +26,9 @@ alias icloud="cd ${HOME}/Library/Mobile\ Documents/com~apple~CloudDocs"
 
 # Quick access to Google Drive folder
 alias googledrive="cd ${HOME}/Library/CloudStorage/GoogleDrive-katsuyoshi.sumida@grafana.com/マイドライブ"
+
+# Obsidian CLI
+obsidian() {
+  /Applications/Obsidian.app/Contents/MacOS/Obsidian "$@"
+}
 
