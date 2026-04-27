@@ -18,7 +18,7 @@ fi
 # bat (modern cat replacement)
 if (( ${+commands[bat]} )); then
   alias cat='bat'
-  alias bcat='bat --style=plain'          # すべての装飾なし
+  alias bcat='bat --style=plain'          # no decorations
 fi
 
 # Quick access to iCloud Drive folder

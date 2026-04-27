@@ -48,7 +48,7 @@ for dot_file in ${DOT_DIR}/*; do
     config )
       for config_dir in $dot_file/*; do
         config_name=$(basename $config_dir)
-        # ghostty と karabiner は macOS のみ
+        # ghostty and karabiner are macOS only
         if [[ "$config_name" == "ghostty" || "$config_name" == "karabiner" ]]; then
           if [[ "$(uname)" != "Darwin" ]]; then
             gray "Skip $config_name (macOS only)"
