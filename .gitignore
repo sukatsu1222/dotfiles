@@ -56,3 +56,6 @@ claude/*
 !claude/settings.json
 !claude/statusline-command.sh
 
+# Local project-level Claude Code settings
+.claude/
+
