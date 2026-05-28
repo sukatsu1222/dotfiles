@@ -24,11 +24,7 @@ fi
 # Quick access to iCloud Drive folder
 alias icloud="cd ${HOME}/Library/Mobile\ Documents/com~apple~CloudDocs"
 
-# Quick access to Google Drive folder
-alias googledrive="cd ${HOME}/Library/CloudStorage/GoogleDrive-katsuyoshi.sumida@grafana.com/マイドライブ"
-
 # Obsidian CLI
 obsidian() {
   /Applications/Obsidian.app/Contents/MacOS/Obsidian "$@"
 }
-
