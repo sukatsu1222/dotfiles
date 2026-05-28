@@ -6,7 +6,12 @@
 ulimit -s unlimited
 
 # Auto-start tmux on login
-# Attach to existing 'default' session or create a new one
+# Attach to existing 'default' session if present (silent check to avoid
+# racing with tmux-continuum auto-restore), otherwise create a new one.
 if [[ -o login ]] && (( ${+commands[tmux]} )) && [[ -z "${TMUX}" ]]; then
-  tmux attach -t default || tmux new -s default
+  if tmux has-session -t default 2>/dev/null; then
+    tmux attach -t default
+  else
+    tmux new -s default
+  fi
 fi
