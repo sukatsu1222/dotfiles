@@ -5,6 +5,8 @@
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
+export COLORTERM=truecolor
+
 # XDG Base Directory
 export XDG_BIN_HOME="${HOME}/.local/bin"
 export XDG_CONFIG_HOME="${HOME}/.config"
