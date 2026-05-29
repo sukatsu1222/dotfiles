@@ -56,7 +56,7 @@ cursor-style-blink = false
 #   - no-cursor: Disable automatic cursor style changes (managed manually)
 #   - sudo: Preserve terminal info when using sudo
 #   - title: Update window title with current directory/command
-shell-integration-features = no-cursor,sudo,title
+shell-integration-features = no-cursor,sudo,title,ssh-terminfo,ssh-env
 
 # -----------------------------------------------------------------------------
 # Clipboard & Selection
