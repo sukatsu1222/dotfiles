@@ -4,16 +4,6 @@ sort_by = "modified"      # Sort by modification time
 sort_reverse = true       # Newest first
 sort_dir_first = true     # Show directories first
 
-[[plugin.prepend_fetchers]]
-id  = "git"
-url = "*"
-run = "git"
-
-[[plugin.prepend_fetchers]]
-id  = "git"
-url = "*/"
-run = "git"
-
 [preview]
 tab_size = 2
 max_width = 600
