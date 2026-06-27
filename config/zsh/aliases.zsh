@@ -47,7 +47,7 @@ fi
 # Kubernetes command aliases (only if kubectl is installed)
 if (( ${+commands[kubectl]} )); then
   alias k='kubectl'
-  
+
   # Get commands
   alias kg='kubectl get'
   alias kgpo='kubectl get pods'
@@ -60,54 +60,54 @@ if (( ${+commands[kubectl]} )); then
   alias kgi='kubectl get ingress'
   alias kgcm='kubectl get configmaps'
   alias kgsec='kubectl get secrets'
-  
+
   # Describe commands
   alias kd='kubectl describe'
   alias kdpo='kubectl describe pod'
   alias kdd='kubectl describe deployment'
   alias kds='kubectl describe service'
   alias kdn='kubectl describe node'
-  
+
   # Delete commands
   alias kdel='kubectl delete'
   alias kdelpo='kubectl delete pod'
   alias kdeld='kubectl delete deployment'
   alias kdels='kubectl delete service'
-  
+
   # Logs commands
   alias kl='kubectl logs'
   alias klf='kubectl logs -f'
   alias klp='kubectl logs -p'
-  
+
   # Apply/Create commands
   alias ka='kubectl apply -f'
   alias kc='kubectl create'
   alias kcf='kubectl create -f'
-  
+
   # Edit commands
   alias ke='kubectl edit'
   alias kepo='kubectl edit pod'
   alias ked='kubectl edit deployment'
   alias kes='kubectl edit service'
-  
+
   # Exec commands
   alias kex='kubectl exec -it'
   alias keti='kubectl exec -it'
-  
+
   # Context and namespace
   alias kctx='kubectl config current-context'
   alias kctxs='kubectl config get-contexts'
   alias kctxu='kubectl config use-context'
   alias kns='kubectl config set-context --current --namespace'
-  
+
   # Port forward
   alias kpf='kubectl port-forward'
-  
+
   # Top commands
   alias ktop='kubectl top'
   alias ktopn='kubectl top nodes'
   alias ktoppo='kubectl top pods'
-  
+
   # Rollout commands
   alias kro='kubectl rollout'
   alias kros='kubectl rollout status'
@@ -128,6 +128,25 @@ if (( ${+commands[mise]} )); then
   alias miu='mise use'            # Set tool version for project
   alias mil='mise ls'             # List installed tools
   alias mir='mise run'            # Run tasks defined in mise configuration
+fi
+
+# eza (modern ls replacement)
+if (( ${+commands[eza]} )); then
+  alias ls='eza --git'
+  alias la='eza --git --all'
+  alias ll='eza --git --long --header --git'
+  alias lla='eza --git --long --header --git --all'
+  alias lt='eza --git --tree --level=2'
+  alias lta='eza --git --tree --level=2 --all'
+else
+  # Fallback to standard ls with color on macOS
+  alias ls="ls -G"
+fi
+
+# bat (modern cat replacement)
+if (( ${+commands[bat]} )); then
+  alias cat='bat'
+  alias bcat='bat --style=plain'          # no decorations
 fi
 
 # -----------------------------------------------------------------------------
@@ -274,7 +293,6 @@ if (( ${+commands[fzf]} )); then
   # Search command history with fzf (Ctrl+R is default, this is for manual use)
   alias hist='history | fzf --tac --no-sort'
 fi
-
 
 # -----------------------------------------------------------------------------
 # yazi function

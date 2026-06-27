@@ -18,7 +18,9 @@ export ZDOTDIR=${XDG_CONFIG_HOME}/zsh
 
 typeset -U path cdpath manpath fpath
 
-if [[ -x "/opt/homebrew/bin/nvim" ]]; then
+if [[ -x "${XDG_DATA_HOME}/mise/shims/nvim" ]]; then
+  export EDITOR="${XDG_DATA_HOME}/mise/shims/nvim"
+elif [[ -x "/opt/homebrew/bin/nvim" ]]; then
   export EDITOR="/opt/homebrew/bin/nvim"
 elif [[ -x "/usr/local/bin/nvim" ]]; then
   export EDITOR="/usr/local/bin/nvim"

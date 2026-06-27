@@ -1,6 +1,13 @@
 # Set Zsh history file location
 export HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 
+# Initialize mise (development tools version manager) early so that
+# mise-managed commands (nvim, eza, bat, fzf, ghq, etc.) are on PATH
+# before completions, OS-specific configs, and aliases are evaluated.
+if (( ${+commands[mise]} )); then
+  eval "$(mise activate zsh)"
+fi
+
 # Load completions configuration
 [[ -s ${ZDOTDIR}/completions.zsh ]] && source ${ZDOTDIR}/completions.zsh
 
@@ -129,11 +136,6 @@ case ${OSTYPE} in
     ;;
 esac
 [[ -s ${ZDOTDIR}/aliases.zsh ]] && source ${ZDOTDIR}/aliases.zsh
-
-# Initialize mise (development tools version manager)
-if (( ${+commands[mise]} )); then
-  eval "$(mise activate zsh)"
-fi
 
 # Initialize fzf shell integration (Ctrl+R, Ctrl+T, Alt+C)
 if (( ${+commands[fzf]} )); then
