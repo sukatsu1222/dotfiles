@@ -9,7 +9,7 @@
 [include]
 	path = ~/.gitconfig_local
 [ghq]
-	root = ~/dev/src
+	root = ~/workspaces/
 [pull]
 	rebase = false
 [credential "https://dev.azure.com"]
