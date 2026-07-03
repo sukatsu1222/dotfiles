@@ -1,5 +1,5 @@
 [tools]
-bat = "latest"
+bat = { version = "latest", postinstall = "bat cache --build" }
 eza = "latest"
 fd = "latest"
 fzf = "latest"
@@ -13,5 +13,5 @@ neovim = "latest"
 node = "lts"
 ripgrep = "latest"
 usage = "latest"
-yazi = "latest"
+yazi = { version = "latest", postinstall = "ya pkg install" }
 zoxide = "latest"

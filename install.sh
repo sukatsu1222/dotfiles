@@ -69,14 +69,5 @@ else
   echo "Yazi dracula flavor is already installed."
 fi
 
-# Install Yazi plugins declared in config/yazi/package.toml
-if command -v ya >/dev/null 2>&1; then
-  green "Installing Yazi plugins via 'ya pkg install'..."
-  ya pkg install
-else
-  red "Skipped Yazi plugin install: 'ya' command not found."
-  red "Install yazi first (e.g. 'mise install'), then re-run this script."
-fi
-
 echo ""
 echo "Installation Finished"
