@@ -83,3 +83,5 @@ Temporary Items
 # Compile
 *.zwc
 
+
+**/.claude/settings.local.json
