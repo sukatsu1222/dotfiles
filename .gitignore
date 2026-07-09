@@ -59,3 +59,11 @@ claude/*
 # Local project-level Claude Code settings
 .claude/
 
+#================================================
+# herdr
+#================================================
+
+# Ignore everything in config/herdr/ except the config file
+config/herdr/*
+!config/herdr/config.toml
+

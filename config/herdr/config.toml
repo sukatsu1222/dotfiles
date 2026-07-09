@@ -1,0 +1,60 @@
+onboarding = false
+# herdr configuration
+# Ported from config/tmux/tmux.conf (Dracula + Ghostty transparency setup).
+# Full reference: `herdr --default-config`
+
+[theme]
+# Same Dracula theme as tmux.conf's dracula/tmux plugin.
+name = "dracula"
+
+[theme.custom]
+# Transparent background, matching tmux.conf's `set -g status-style "bg=default"`
+# used for Ghostty transparency support.
+panel_bg = "reset"
+
+[terminal]
+# tmux.conf pins `set -g default-shell /bin/zsh`.
+default_shell = "/bin/zsh"
+
+# tmux.conf always opens new panes/windows in the current pane's path
+# (`-c "#{pane_current_path}"`); "follow" is herdr's equivalent (also its default,
+# set explicitly here to keep the intent documented).
+new_cwd = "follow"
+
+[keys]
+# tmux.conf remaps the prefix from Ctrl+b to Ctrl+a.
+prefix = "ctrl+a"
+
+# tmux.conf: `bind -n S-Left previous-window` / `bind -n S-Right next-window`
+# — direct bindings, no prefix required. This replaces herdr's default
+# prefix+p / prefix+n bindings for previous_tab / next_tab.
+previous_tab = "shift+left"
+next_tab = "shift+right"
+
+# Remapped from herdr's default prefix+c to prefix+t (mnemonic: "tab"),
+# no conflicting default binding on prefix+t.
+new_tab = "prefix+t"
+
+# Remapped from herdr's default prefix+v/prefix+minus.
+split_vertical = "prefix+d"
+split_horizontal = "prefix+shift+d"
+
+# close_workspace's default (prefix+shift+d) now collides with
+# split_horizontal above, so it's moved here (mnemonic: "close").
+close_workspace = "prefix+shift+c"
+
+# Not remapped, already matching tmux.conf by default:
+# - focus_pane_left/down/up/right = prefix+h/j/k/l (tmux: bind h/j/k/l select-pane)
+# - reload_config = prefix+shift+r (tmux: bind r source-file ...; herdr's own
+#   prefix+r is already taken by resize_mode, so this is the closest match)
+
+[session]
+# Mirrors tmux-resurrect + tmux-continuum (auto-save and restore sessions
+# across restarts).
+resume_agents_on_restore = true
+
+[ui.toast]
+delivery = "system"
+
+[ui.sound]
+enabled = false
