@@ -1,5 +1,6 @@
 [tools]
 bat = { version = "latest", postinstall = "bat cache --build" }
+claude = "latest"
 eza = "latest"
 fd = "latest"
 fzf = "latest"
