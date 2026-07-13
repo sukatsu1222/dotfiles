@@ -1,22 +1,24 @@
 {
+  "model": "sonnet",
   "hooks": {
     "SessionStart": [
       {
+        "matcher": "*",
         "hooks": [
           {
-            "command": "bash '/Users/katsuyoshi.sumida/.claude/hooks/herdr-agent-state.sh' session",
-            "timeout": 10,
-            "type": "command"
+            "type": "command",
+            "command": "bash ~/.claude/hooks/herdr-agent-state.sh session",
+            "timeout": 10
           }
-        ],
-        "matcher": "*"
+        ]
       }
     ]
   },
   "statusLine": {
-    "command": "bash ~/.claude/statusline-command.sh",
-    "type": "command"
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
   },
-  "theme": "dark-ansi",
-  "tui": "fullscreen"
+  "effortLevel": "xhigh",
+  "tui": "fullscreen",
+  "theme": "dark-ansi"
 }
