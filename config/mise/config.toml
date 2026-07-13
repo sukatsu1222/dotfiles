@@ -1,11 +1,13 @@
 [tools]
 bat = { version = "latest", postinstall = "bat cache --build" }
+claude = "latest"
 eza = "latest"
 fd = "latest"
 fzf = "latest"
 gh = "latest"
 ghq = "latest"
 go = "latest"
+herdr = "latest"
 java = "temurin-25"
 jq = "latest"
 lazygit = "latest"
@@ -15,3 +17,72 @@ ripgrep = "latest"
 usage = "latest"
 yazi = { version = "latest", postinstall = "ya pkg install" }
 zoxide = "latest"
+
+[dotfiles]
+# Sources are resolved relative to this file's directory (config/mise/).
+# Default mode is symlink; a directory source becomes one symlink for the
+# whole directory, matching the previous deploy.sh behavior.
+# Root-level dotfiles (repo root, resolved as ../../)
+"~/.gitconfig"        = "../../gitconfig"
+"~/.gitignore_global" = "../../gitignore_global"
+"~/.zshenv"           = "../../zshenv"
+"~/.claude"           = "../../claude"
+# XDG config dirs (config/*, resolved as ../)
+"~/.config/bat"       = "../bat"
+"~/.config/ghostty"   = "../ghostty"
+"~/.config/herdr"     = "../herdr"
+"~/.config/karabiner" = "../karabiner"
+"~/.config/lazygit"   = "../lazygit"
+"~/.config/mise"      = "../mise"
+"~/.config/nvim"      = "../nvim"
+"~/.config/tmux"      = "../tmux"
+"~/.config/yazi"      = "../yazi"
+"~/.config/zsh"       = "../zsh"
+
+# Machine-local caches (gitignored). Target the real repo path (~/.dotfiles/...)
+# rather than the ~/.config symlink, so cloning works regardless of whether
+# dotfiles have been applied yet (repos run before dotfiles during bootstrap).
+[bootstrap.repos]
+"~/.dotfiles/config/yazi/flavors/dracula.yazi" = { url = "https://github.com/dracula/yazi.git" }
+
+[bootstrap.hooks.post-repos]
+# mise runs hooks with `sh`, so keep this POSIX-compatible ([ ] not [[ ]]);
+# on Linux /bin/sh is often dash, and the TPM branch below runs there.
+run = '''
+# TPM (Tmux Plugin Manager) — Linux only, matching previous install.sh behavior
+if [ "$(uname -s)" = "Linux" ]; then
+  TPM_DIR="$HOME/.dotfiles/config/tmux/plugins/tpm"
+  [ -d "$TPM_DIR" ] || git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
+fi
+# zimfw bootstrap script
+ZIM_HOME="$HOME/.dotfiles/config/zsh/.zim"
+[ -f "$ZIM_HOME/zimfw.zsh" ] || curl -fsSL --create-dirs -o "$ZIM_HOME/zimfw.zsh" \
+  https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+'''
+
+# macOS defaults. TOML types map to `defaults` types (bool -> -bool,
+# string -> -string, int -> -int). Domains with dots must be quoted.
+[bootstrap.macos.defaults]
+"com.apple.LaunchServices" = { LSQuarantine = false }
+"NSGlobalDomain" = { NSAutomaticCapitalizationEnabled = false, NSAutomaticQuoteSubstitutionEnabled = false, NSAutomaticPeriodSubstitutionEnabled = false }
+"com.apple.driver.AppleBluetoothMultitouch.trackpad" = { Clicking = true }
+"com.apple.screencapture" = { type = "png" }
+"com.apple.finder" = { NewWindowTarget = "PfHm", AppleShowAllFiles = true, ShowStatusBar = true, ShowPathbar = true, FXPreferredViewStyle = "Nlsv" }
+"com.apple.dock" = { autohide = true, "show-recents" = false }
+
+[bootstrap.hooks.pre-defaults]
+# Cases [bootstrap.macos.defaults] can't express: mkdir, $HOME expansion in the
+# screenshot location (mise writes ~/$HOME literally), and a -currentHost write.
+# POSIX sh (hooks run with sh), guarded to macOS so it no-ops elsewhere.
+run = '''
+if [ "$(uname -s)" = "Darwin" ]; then
+  mkdir -p "$HOME/Pictures/ScreenShots"
+  defaults write com.apple.screencapture location -string "$HOME/Pictures/ScreenShots"
+  defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+fi
+'''
+
+# Future extension points (not needed today, no existing assets):
+#   [bootstrap.packages]              OS packages (brew/apt/...)
+#   [bootstrap.macos.launchd.agents]  macOS LaunchAgents
+#   [bootstrap.user]                  login shell etc.
