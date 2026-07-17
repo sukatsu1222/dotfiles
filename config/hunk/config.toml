@@ -6,3 +6,7 @@
 # and the terminal. "dracula" is a built-in theme id ("dracula-soft" also
 # exists). hunk also accepts the table form: theme = { name = "dracula" }.
 theme = "dracula"
+
+# Let the terminal background show through, matching Ghostty transparency and
+# herdr's panel_bg = "reset". Equivalent to the --transparent-bg flag.
+transparent_background = true
