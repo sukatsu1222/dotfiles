@@ -1,5 +1,5 @@
 {
-  "model": "sonnet",
+  "model": "Sonnet",
   "hooks": {
     "SessionStart": [
       {
@@ -20,5 +20,13 @@
   },
   "effortLevel": "xhigh",
   "tui": "fullscreen",
-  "theme": "dark-ansi"
+  "theme": "dark-ansi",
+  "extraKnownMarketplaces": {
+    "obsidian-skills": {
+      "source": {
+        "source": "github",
+        "repo": "kepano/obsidian-skills"
+      }
+    }
+  }
 }
