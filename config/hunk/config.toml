@@ -1,0 +1,8 @@
+# hunk configuration
+# ~/.config/hunk is symlinked to this directory. Only config.toml is tracked;
+# hunk's machine-local state.json here is gitignored (see .gitignore).
+
+# Dracula theme, matching config/herdr/config.toml ([theme] name = "dracula")
+# and the terminal. "dracula" is a built-in theme id ("dracula-soft" also
+# exists). hunk also accepts the table form: theme = { name = "dracula" }.
+theme = "dracula"

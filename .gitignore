@@ -67,3 +67,12 @@ claude/*
 config/herdr/*
 !config/herdr/config.toml
 
+#================================================
+# hunk
+#================================================
+
+# Ignore everything in config/hunk/ except the config file
+# (hunk writes machine-local state.json here)
+config/hunk/*
+!config/hunk/config.toml
+

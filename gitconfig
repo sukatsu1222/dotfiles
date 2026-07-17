@@ -14,3 +14,13 @@
 	rebase = false
 [credential "https://dev.azure.com"]
 	useHttpPath = true
+[pager]
+	diff = hunk pager
+	show = hunk pager
+	log = hunk pager
+[diff]
+	tool = hunk
+[difftool "hunk"]
+	cmd = hunk difftool "$LOCAL" "$REMOTE" "$MERGED"
+[difftool]
+	prompt = false
