@@ -1,11 +1,13 @@
 [tools]
 bat = { version = "latest", postinstall = "bat cache --build" }
 claude = "latest"
+delta = "latest"
 eza = "latest"
 fd = "latest"
 fzf = "latest"
 gh = "latest"
 ghq = "latest"
+glow = "latest"
 go = "latest"
 herdr = "latest"
 hunk = { version = "latest", postinstall = "mkdir -p ~/.dotfiles/claude/skills && ln -sfn \"$(dirname \"$(hunk skill path)\")\" ~/.dotfiles/claude/skills/hunk-review" }
@@ -60,6 +62,23 @@ fi
 ZIM_HOME="$HOME/.dotfiles/config/zsh/.zim"
 [ -f "$ZIM_HOME/zimfw.zsh" ] || curl -fsSL --create-dirs -o "$ZIM_HOME/zimfw.zsh" \
   https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+# herdr plugins — herdr has no declarative plugin config, so the desired set is
+# declared here and (re)installed idempotently via `herdr plugin install`, which
+# resolves the manifest, builds, pins the ref, and registers the plugin. Fields:
+# "<plugin_id> <owner>/<repo> <ref>". Plugin code + built artifacts land under
+# config/herdr/plugins/ (gitignored). Best-effort: skipped if herdr is absent.
+if command -v herdr >/dev/null 2>&1; then
+  installed="$(herdr plugin list --json 2>/dev/null || true)"
+  for entry in \
+    "hunk.diff edmundmiller/herdr-plugin-hunk 11ba5dcca4358203ca68f160becf6870cf016c18" \
+    "herdr-file-viewer smarzban/herdr-file-viewer v1.14.0"; do
+    set -- $entry
+    case "$installed" in
+      *"\"$1\""*) ;;  # already installed
+      *) herdr plugin install "$2" --ref "$3" --yes || true ;;
+    esac
+  done
+fi
 '''
 
 # macOS defaults. TOML types map to `defaults` types (bool -> -bool,
