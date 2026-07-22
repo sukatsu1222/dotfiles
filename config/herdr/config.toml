@@ -48,14 +48,34 @@ close_workspace = "prefix+shift+c"
 # - reload_config = prefix+shift+r (tmux: bind r source-file ...; herdr's own
 #   prefix+r is already taken by resize_mode, so this is the closest match)
 
-# Launch hunk to review the working tree; --watch auto-reloads as the agent
-# edits. prefix+alt+d (d = diff) is conflict-free vs the remapped prefix+d /
-# prefix+shift+d above. type = "pane" opens a temporary pane that closes when
-# hunk exits. Switch to type = "popup" once on herdr >= 0.7.4 for a floating pane.
+# Plugin action keybindings (herdr-file-viewer, hunk.diff). type = "plugin_action":
+# `command` is the qualified action id (<plugin_id>.<action_id>); herdr resolves
+# and invokes it with the current pane/workspace context.
+
+# herdr-file-viewer — git-aware read-only file browser (tree + content/diff).
+# The action is launch-or-focus-or-toggle, scoped to the current tab.
 [[keys.command]]
-key = "prefix+alt+d"
-type = "pane"
-command = "hunk diff --watch"
+key = "prefix+f"        # file viewer in a split
+type = "plugin_action"
+command = "herdr-file-viewer.open-file-viewer"
+
+[[keys.command]]
+key = "prefix+shift+f"  # file viewer in its own tab
+type = "plugin_action"
+command = "herdr-file-viewer.open-file-viewer-tab"
+
+# hunk.diff — Hunk diff review of the working tree. prefix+v / prefix+shift+v
+# are free (split_vertical was remapped to prefix+d), so this leaves the default
+# focus_pane_left = prefix+h intact.
+[[keys.command]]
+key = "prefix+v"        # working-tree diff in a split
+type = "plugin_action"
+command = "hunk.diff.worktree-split"
+
+[[keys.command]]
+key = "prefix+shift+v"  # working-tree diff in its own tab
+type = "plugin_action"
+command = "hunk.diff.worktree-tab"
 
 [session]
 # Mirrors tmux-resurrect + tmux-continuum (auto-save and restore sessions
