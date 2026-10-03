@@ -1,12 +1,12 @@
 # Set Zsh history file location
 export HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 
-# Initialize mise (development tools version manager) early so that
-# mise-managed commands (nvim, eza, bat, fzf, ghq, etc.) are on PATH
-# before completions, OS-specific configs, and aliases are evaluated.
-if (( ${+commands[mise]} )); then
-  eval "$(mise activate zsh)"
-fi
+# Put mise shims on PATH early so that mise-managed commands (nvim, eza, bat,
+# fzf, ghq, etc.) are available before completions, OS-specific configs, and
+# aliases are evaluated. `mise activate` is deferred until after Zim, because
+# it calls compinit and would trigger Zim's "completion already initialized"
+# warning.
+path=(${XDG_DATA_HOME:-${HOME}/.local/share}/mise/shims(N-/) $path)
 
 # Load completions configuration
 [[ -s ${ZDOTDIR}/completions.zsh ]] && source ${ZDOTDIR}/completions.zsh
@@ -124,6 +124,12 @@ fi
 # Initialize modules.
 source ${ZIM_HOME}/init.zsh
 # }}} End configuration added by Zim install
+
+# Initialize mise (development tools version manager) after Zim so that
+# compinit has already been run by Zim's completion module.
+if (( ${+commands[mise]} )); then
+  eval "$(mise activate zsh)"
+fi
 
 
 # Load OS-specific and common configurations
