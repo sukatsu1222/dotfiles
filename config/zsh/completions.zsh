@@ -31,4 +31,9 @@ if (( ${+commands[mise]} )) && [[ ! -f ${ZCOMPLETIONS}/_mise ]]; then
   mise completion zsh > ${ZCOMPLETIONS}/_mise
 fi
 
+# herdr
+if (( ${+commands[herdr]} )) && [[ ! -f ${ZCOMPLETIONS}/_herdr ]]; then
+  herdr completion zsh > ${ZCOMPLETIONS}/_herdr
+fi
+
 fpath=(${ZCOMPLETIONS} $fpath)
