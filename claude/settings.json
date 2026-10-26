@@ -1,5 +1,30 @@
 {
-  "model": "Sonnet",
+  "permissions": {
+    "deny": [
+      "Bash(npm install -g *)",
+      "Bash(npm i -g *)",
+      "Bash(npm install --global *)",
+      "Bash(npm i --global *)",
+      "Bash(sudo npm install -g *)",
+      "Bash(sudo npm i -g *)",
+      "Bash(sudo npm install --global *)",
+      "Bash(sudo npm i --global *)",
+      "Bash(yarn global add *)",
+      "Bash(sudo yarn global add *)",
+      "Bash(pnpm add -g *)",
+      "Bash(pnpm install -g *)",
+      "Bash(sudo pnpm add -g *)",
+      "Bash(sudo pnpm install -g *)",
+      "Bash(brew install *)",
+      "Bash(sudo brew install *)",
+      "Bash(gem install *)",
+      "Bash(sudo gem install *)",
+      "Bash(cargo install *)",
+      "Bash(sudo cargo install *)",
+      "Bash(go install *)",
+      "Bash(sudo go install *)"
+    ]
+  },
   "hooks": {
     "SessionStart": [
       {
@@ -18,9 +43,9 @@
     "type": "command",
     "command": "bash ~/.claude/statusline-command.sh"
   },
-  "effortLevel": "xhigh",
-  "tui": "fullscreen",
-  "theme": "dark-ansi",
+  "enabledPlugins": {
+    "dynatrace@claude-plugins-official": true
+  },
   "extraKnownMarketplaces": {
     "obsidian-skills": {
       "source": {
@@ -28,5 +53,8 @@
         "repo": "kepano/obsidian-skills"
       }
     }
-  }
+  },
+  "effortLevel": "xhigh",
+  "tui": "fullscreen",
+  "theme": "dark-ansi"
 }
